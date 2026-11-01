@@ -613,7 +613,7 @@ mindmap
   root((第 7 章<br/>字典与集合))
     字典
       键值对 花括号
-      d[键] 与 KeyError
+      按键取值 与 KeyError
       get 默认值
       新增即修改
       pop del
@@ -631,7 +631,7 @@ mindmap
       去重 无序
       add discard in
       交 并 差 对称差
-      空集合 set()
+      空集合用 set 创建
     选择
       五种类型对比
 ```
