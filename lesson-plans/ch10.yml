@@ -1,0 +1,132 @@
+# 第 10 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 10
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出 模块、标准库、第三方库的区别，以及常见第三方库的名称和用途
+  - 解释 类与对象的关系，以及 `__init__`、`self`、属性、方法的含义
+  - 读懂 AI 框架中“创建对象、调用方法”的代码，例如 `model.fit(X, y)`
+  skill:
+  - 使用 import 导入模块，使用 math、random、datetime、pathlib 等标准库完成小任务
+  - 使用 pip 安装第三方库，用 openpyxl 生成 Excel 文件，用 PyInstaller 打包程序
+  quality:
+  - 安装第三方库只从官方或可信镜像下载，警惕恶意包
+  - 尊重开源许可，使用开源软件时注明来源
+key_points:
+- 模块与 import
+- 常用标准库
+- 用 pip 安装第三方库
+- 办公自动化：用 openpyxl 读写 Excel
+difficulties:
+- point: pip 装到了另一个 Python，导入时报 ModuleNotFoundError
+  solution: 统一使用 Thonny 的“打开系统 shell”或“管理包”，现场演示 sys.executable 的检查办法
+- point: 类和对象、self 的含义
+  solution: 用“模具和产品”的比喻配合商品类的例子，逐行演示创建对象时 __init__ 的执行
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 10 章 模块、第三方库与面向对象入门的情景导入和第一节，操作交互动画“类与对象：一个模具压出多个商品”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：陈姐的电脑桌面乱成一团：进货单、价目表、海报图片、会员表格……几百个文件堆在一起。她又提出新要求：“每天的销售日报能不能……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 10.1 模块与 import：import 的几种写法、把自己的函数做成模块
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 掌握 import 的几种写法，会做自己的模块
+  - name: 讲授
+    minutes: 5
+    content: 10.2 常用标准库：math 与 random、time 与 datetime、pathlib、用 PyInstaller 把程序打包成 exe
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用常用标准库解决日常问题，会打包程序
+  - name: 讲授
+    minutes: 5
+    content: 10.3 用 pip 安装第三方库：pip install、虚拟环境是什么、常见的第三方库
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 pip 和国内镜像安装第三方库
+  - name: 讲授
+    minutes: 5
+    content: 10.4 办公自动化：用 openpyxl 读写 Excel
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 openpyxl 读写 Excel，体验办公自动化
+  - name: 讲授与演示
+    minutes: 5
+    content: 10.5 类与对象：类是模具，对象是产品、自己写一个类、什么时候用类
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“类与对象：一个模具压出多个商品”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 理解类和对象，能写简单的类
+  - name: 讲授
+    minutes: 5
+    content: 10.6 看懂别人的类：继承与 model.fit()：继承一句话、为什么 AI 代码里全是 model.fit()
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 能看懂继承和 AI 代码中的 model.fit()
+  - name: 拓展
+    minutes: 5
+    content: 10.7 前沿视窗：开源生态与“包”的安全
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 认识开源生态和包的安全问题
+  - name: 实验
+    minutes: 2
+    content: 实验 10-1 按扩展名批量整理文件
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: '会用 pathlib 遍历文件夹、获取扩展名、新建文件夹；会用 shutil.move 移动文件；会用字典表示“扩展名 '
+  - name: 实验
+    minutes: 2
+    content: 实验 10-2 用 openpyxl 生成销售日报 Excel
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 pip（或 Thonny 的“管理包”）安装第三方库；会用 openpyxl 新建工作簿、写入数据和公式、设置格式
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。
+- '简答题：找错并改正。下面的程序运行时报错 `TypeError: Goods.__init__() takes 2 positional arguments but 3 were given`，为什么？怎么改？'
+- 简答题：用自己的话解释下面三行代码分别做了什么：`model = LinearRegression()`、`model.fit(X, y)`、`model.predict(new_X)`。
+- 实操题：输入会员的注册日期（格式如 2023-12-11），计算到 2025 年 12 月 31 日为止，他已经注册了多少天。
+- 实操题：写一个会员类 Member：属性有会员号、姓名、积分；方法 `add_points(money)` 按消费金额加积分（每 1 元积 1 分，不足 1 元不积）；方法 `level()` 返回会员等级（积分 3000 及以上“金卡”，1000 及以上“银卡”，否则“普通”）。创建会员 M001 周洋（积分 693，虚构），消费 358.5 元后输出积分和等级。
+- 实验报告：实验 10-1、实验 10-2、实验 10-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

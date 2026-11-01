@@ -1,0 +1,132 @@
+# 第 3 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 3
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出转义字符 `\n`、`\t`、`\\` 的含义，以及字符串“不可修改”的特点
+  - 解释正向索引、反向索引和切片“含起点、不含终点”的规则
+  skill:
+  - 使用`strip`、`split`、`join`、`replace`、`find`、`count`、`startswith`、`isdigit` 等方法整理和检查文字
+  - 写出取出前几位、后几位、中间一段的切片表达式，完成手机号脱敏等任务
+  - 分析中文乱码产生的原因，说出 UTF-8 和 GBK 的区别
+  quality:
+  - 处理顾客信息等文本时注意保护隐私，示例数据一律虚构
+  - 认识编码规范的意义，养成统一使用 UTF-8 的习惯
+key_points:
+- 字符串的写法
+- 索引与切片
+- 字符串的常用方法
+- 长度与判断方法
+difficulties:
+- point: 索引从 0 开始，切片不包含结束位置
+  solution: 在黑板画出字符和下标对照的格子，用动画演示切片的左闭右开
+- point: 方法返回新字符串，原字符串不变
+  solution: 演示 s.strip() 后再打印 s，引导学生用赋值保存结果
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 3 章 字符串：处理文字信息的情景导入和第一节，操作交互动画“字符串切片尺”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：陈姐想给老顾客办会员卡，让小周把登记表录进电脑。登记表是顾客自己填的，五花八门：有人把手机号写成“138 0013 80……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 3.1 字符串的写法：单引号、双引号和三引号、转义字符
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用三种引号和转义字符写字符串
+  - name: 讲授与演示
+    minutes: 5
+    content: 3.2 索引与切片：索引、切片、字符串不能修改
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“字符串切片尺”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 掌握索引与切片，能取出手机号后四位等片段
+  - name: 讲授
+    minutes: 5
+    content: 3.3 字符串的常用方法：什么是方法、去空格、替换、拆分与拼接等
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用常用方法清洗文本数据
+  - name: 讲授
+    minutes: 5
+    content: 3.4 长度与判断方法
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 len 和判断方法检查输入是否合法
+  - name: 讲授
+    minutes: 5
+    content: 3.5 格式化进阶：对齐与填充、中文对齐的小麻烦
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 能输出对齐整齐的小票和表格
+  - name: 讲授
+    minutes: 5
+    content: 3.6 中文与编码初识：字符在电脑里是数字、编码、乱码是怎么来的
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 理解乱码的来历，为后面读写文件打基础
+  - name: 拓展
+    minutes: 5
+    content: 3.7 前沿视窗：大模型眼中的文字
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 了解大模型按 token 处理文字，联系 AI 应用
+  - name: 实验
+    minutes: 2
+    content: 实验 3-1 会员信息整理与手机号脱敏
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 `strip`、`replace` 清理输入的文字；会用 `len`、`isdigit`、`startswith`
+  - name: 实验
+    minutes: 2
+    content: 实验 3-2 从身份证号中取出出生日期
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 能根据“第几位”换算出正确的索引和切片；会把切片结果和其他文字拼接成需要的格式
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。
+- 简答题：找错并改正。下面的程序想去掉商品名两头的空格并转成大写，但输出没有变化，为什么？怎么改？
+- 简答题：用自己的话解释：为什么用 Excel 打开 Python 生成的 CSV 文件，中文可能是乱码？
+- 实操题：输入一个商品编号（如“p07”），把它整理成统一格式：去掉两头空格、字母转大写、数字部分补足 3 位（输出“P007”）。提示：字母是第一个字符，后面是数字。
+- 实操题：输入一个电子邮箱（如“zhoulin@example.com”），输出用户名和域名两部分，并把用户名脱敏成“第一个字母 + *** ”的形式（输出“z***@example.com”）。
+- 实验报告：实验 3-1、实验 3-2、实验 3-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

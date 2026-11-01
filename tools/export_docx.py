@@ -116,6 +116,8 @@ def set_cjk_font(docx, font="Microsoft YaHei"):
             if item.filename == "word/styles.xml":
                 xml = data.decode("utf-8")
                 xml = re.sub(r'w:eastAsiaTheme="[^"]*"', f'w:eastAsia="{font}"', xml)
+                # 西文也统一用同一字体（代码样式仍是 Consolas）
+                xml = re.sub(r'w:(ascii|hAnsi|cs)Theme="[^"]*"', lambda m: f'w:{m.group(1)}="{font}"', xml)
                 xml = xml.replace('<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" />',
                                   f'<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:eastAsia="{font}" />')
                 data = xml.encode("utf-8")

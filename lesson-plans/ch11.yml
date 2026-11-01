@@ -1,0 +1,126 @@
+# 第 11 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 11
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出 NumPy、pandas、Matplotlib 三个库各自的用途，以及 DataFrame、Series 的含义
+  - 解释 为什么用数组整体运算比写循环更简单、更快
+  skill:
+  - 使用 Jupyter 逐个单元格运行代码，查看中间结果
+  - 使用 pandas 读入 CSV 表格，完成选列、筛选、排序和分组汇总
+  - 使用 Matplotlib 画折线图、柱状图、饼图，并让中文正常显示
+  quality:
+  - 做数据分析时如实呈现结果，不篡改数据、不误导读图的人
+  - 使用 AI 写分析代码时，核对结果，不上传真实的个人数据
+key_points:
+- 为什么要用数据处理库
+- Jupyter：边写边看的笔记本
+- NumPy：成批计算的数组
+- pandas：处理表格
+difficulties:
+- point: pandas 的布尔筛选和多条件组合（& 与 |）
+  solution: 先用一个条件筛选，再逐步加条件，配合交互动画演示每一步的结果
+- point: 分组统计 groupby 的含义
+  solution: 用“分组、计算、合并”三步图解配合手工分组小例子，再对照 pandas 结果
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib的情景导入和第一节，操作交互动画“pandas 筛选与分组”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：实验 9-1 里，小周用循环把全年 8437 行销售记录读了一遍，按支付方式算出了合计。陈姐看了很满意，接着又提了一串问……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 11.1 为什么要用数据处理库：循环与“一行代码”、快多少、三个库各管什么
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 对比循环写法和库的写法，理解为什么用库
+  - name: 讲授
+    minutes: 5
+    content: 11.2 Jupyter：边写边看的笔记本：安装与启动、单元格与 Shift+Enter
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会启动 Jupyter，掌握单元格的运行
+  - name: 讲授
+    minutes: 5
+    content: 11.3 NumPy：成批计算的数组：创建数组、整体运算与布尔筛选、统计函数与二维数组
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会创建 NumPy 数组，做整体运算和筛选
+  - name: 讲授与演示
+    minutes: 5
+    content: 11.4 pandas：处理表格：读入数据，先看一看、选列与筛选、排序与分组汇总、新增列与缺失值
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“pandas 筛选与分组”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 会用 pandas 读入、筛选、排序和分组统计
+  - name: 讲授
+    minutes: 5
+    content: 11.5 Matplotlib：把数据画成图：先解决中文显示、折线图、柱状图、饼图
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 Matplotlib 画折线图、柱状图和饼图
+  - name: 拓展
+    minutes: 5
+    content: 11.6 前沿视窗：在 Jupyter 中让 AI 帮忙写分析代码
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 了解在 Jupyter 中用 AI 辅助写代码
+  - name: 实验
+    minutes: 2
+    content: 实验 11-1 读入全年销售表，回答 5 个问题
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 `read_csv` 读入表格，用 shape、head 查看数据；会用筛选、`groupby` 分组汇总、`va
+  - name: 实验
+    minutes: 2
+    content: 实验 11-2 画月度营业额折线图和品类销售额柱状图
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会设置中文字体，让图中的中文正常显示；会用 `plot`、`bar` 画折线图和柱状图，添加标题、坐标轴名称和数值标注；
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。
+- '简答题：找错并改正。小周想筛选出“零食”品类的记录，写了 `df["品类" == "零食"]`，运行时报错 `KeyError: False`，为什么？怎么改？'
+- 简答题：用自己的话说明 `df[df["支付方式"] == "微信"].groupby("品类")["金额"].mean()` 这一行代码依次做了哪几件事，结果是什么样子。
+- 实操题：用 pandas 统计 2025 年每个月的订单数（不同单号的个数），找出订单最多的月份。
+- 实操题：画一张柱状图，显示一天中每个整点（7 点、8 点……）的订单数，标题为“各时段订单数”，保存为“时段订单.png”。
+- 实验报告：实验 11-1、实验 11-2、实验 11-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

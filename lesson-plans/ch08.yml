@@ -1,0 +1,132 @@
+# 第 8 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 8
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出 函数的定义、调用、参数、返回值等概念，以及使用函数的好处
+  - 解释 return 与 print 的区别、局部变量与全局变量的区别
+  skill:
+  - 使用 def 定义带参数和返回值的函数，会用默认值和关键字参数调用
+  - 使用 assert 测试自己写的函数，用 `sorted(key=...)` 和 lambda 按指定规则排序
+  - 分析 递归函数的执行过程，说出递归必须有结束条件的原因
+  quality:
+  - 养成把程序拆分成函数、写文档字符串的工程习惯
+  - 了解让 AI 调用函数时要控制权限，培养安全意识
+key_points:
+- 定义和调用函数
+- 参数
+- 返回值
+- 局部变量与全局变量
+difficulties:
+- point: return 与 print 的区别，忘写 return 得到 None
+  solution: 同一函数分别用 print 和 return 实现，演示把结果再参与计算时的差异
+- point: 局部变量和全局变量的作用范围
+  solution: 用交互动画展示函数调用时变量的创建和销毁，强调用参数和返回值传递数据
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 8 章 函数：把代码打包复用的情景导入和第一节，操作交互动画“函数调用与返回”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：小周的收银程序已经有 200 多行了。陈姐让他加一个“退货”功能、一个“会员日”功能，小周一看，这两个功能都要算折扣，于……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 8.1 定义和调用函数：def、为什么要用函数
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会定义和调用函数，理解函数的好处
+  - name: 讲授
+    minutes: 5
+    content: 8.2 参数：位置参数、默认值与关键字参数
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 掌握位置参数、默认值和关键字参数
+  - name: 讲授与演示
+    minutes: 5
+    content: 8.3 返回值：return、return 与 print 的区别、返回多个值
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“函数调用与返回”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 理解 return，分清返回和打印
+  - name: 讲授
+    minutes: 5
+    content: 8.4 局部变量与全局变量：函数里的变量只在函数里有效、在函数里使用全局变量
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 理解变量作用域，避免 UnboundLocalError
+  - name: 讲授
+    minutes: 5
+    content: 8.5 文档字符串与拆分长程序：文档字符串、把长程序拆成几个函数
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会写文档字符串，能把长程序拆分成函数
+  - name: 讲授
+    minutes: 5
+    content: 8.6 lambda 与递归入门：lambda 与 sorted(key=...)、递归入门
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 初步了解 lambda 排序和递归
+  - name: 拓展
+    minutes: 5
+    content: 8.7 前沿视窗：让大模型来调用你写的函数
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 了解大模型函数调用，联系 AI 应用
+  - name: 实验
+    minutes: 2
+    content: 实验 8-1 把收银程序改写成函数
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会把一段已有的代码改写成带参数、带返回值的函数；会用默认值和关键字参数调用函数；体会“规则只改一处”的好处
+  - name: 实验
+    minutes: 2
+    content: 实验 8-2 小店工具函数库与 assert 自测
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会把几个相关的函数写在一个文件里，作为“函数库”；会用 `from 文件名 import 函数名` 导入并使用自己写的函
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果，并解释为什么 a 没变而 b 变了。
+- '简答题：找错并改正。下面的程序想求两个圆的面积之和，运行后先输出了 3.14 和 12.56，接着报错 `TypeError: unsupported operand type(s) for +: ''NoneType'' and ''NoneType''`，为什么？怎么改？'
+- 简答题：结合情景导入里的例子，说说使用函数有哪些好处。
+- 实操题：写一个函数 `is_leap(year)`，判断闰年，返回 True 或 False（规则见第 4 章实操题 1），并用 assert 测试 2024、2025、1900、2000 四个年份。
+- 实操题：写一个函数 `grade(score)`，返回成绩等级（90 及以上优秀，80～89 良好，70～79 中等，60～69 及格，60 以下不及格）。然后对列表 `[95, 82, 76, 61, 45]` 中的每个成绩调用它，输出“95 优秀”这样的结果。
+- 实验报告：实验 8-1、实验 8-2、实验 8-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

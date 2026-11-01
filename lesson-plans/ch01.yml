@@ -1,0 +1,132 @@
+# 第 1 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 1
+online: 4
+offline: 2
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出程序、编程语言、解释器的含义，以及 Python 在人工智能中的用途
+  - 解释解释器一行一行执行程序的过程，以及交互模式和脚本文件的区别
+  skill:
+  - 安装 Thonny，新建、保存、运行一个 Python 程序
+  - 编写使用 `print`、`input` 和注释的简单程序
+  - 读懂报错信息，说出出错的行号、错误类型和大致原因
+  quality:
+  - 养成先读报错信息、再动手改的习惯，遇到问题不慌张
+  - 了解使用 AI 编程助手的边界：不把真实的个人信息粘贴给 AI
+key_points:
+- 程序和编程语言
+- 为什么学 Python
+- 安装 Thonny
+- 第一个程序
+difficulties:
+- point: 看到红色报错就慌，不知道从哪里看起
+  solution: 用“三步读法”现场故意制造三种常见报错，带学生一起找最后一行和行号
+- point: 中英文符号混用（中文括号、引号）导致报错
+  solution: 对照展示中英文符号，安装后统一设置英文输入法，并在实验中专门练一次找错
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 72
+    content: 阅读网页教材第 1 章 初识 Python：搭好环境，写出第一个程序的情景导入和第一节，操作交互动画“程序是怎么运行的”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：陈姐在幸福路开了一家社区小店“街坊便利店”，卖饮料、零食、早餐和日用品。店里请了一位店员小周，三十出头，以前在工厂做质检……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授与演示
+    minutes: 5
+    content: 1.1 程序和编程语言：程序就是写给电脑的菜谱、解释器、编程语言有很多种
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“程序是怎么运行的”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 建立程序和解释器的直观印象，消除对编程的畏惧
+  - name: 讲授
+    minutes: 5
+    content: 1.2 为什么学 Python：Python 的特点、Python 与人工智能、本专业哪些课程要用 Python
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 让学生知道 Python 在本专业后续课程中的用途，明确学习目的
+  - name: 讲授
+    minutes: 5
+    content: 1.3 安装 Thonny：下载与安装、认识 Thonny 的界面、其他编程工具（了解）
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 保证每位学生都能装好并打开 Thonny
+  - name: 讲授
+    minutes: 5
+    content: 1.4 第一个程序：print、input、注释
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 写出第一个程序，体验输入、处理、输出
+  - name: 讲授
+    minutes: 5
+    content: 1.5 交互模式与脚本文件：Shell、脚本文件、缩进和代码规范
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 分清 Shell 和脚本文件，养成保存程序文件的习惯
+  - name: 讲授
+    minutes: 5
+    content: 1.6 读懂报错信息：报错不可怕、三步读法、三种最常见的报错
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 学会三步读法，把报错当作提示而不是失败
+  - name: 拓展
+    minutes: 5
+    content: 1.7 前沿视窗：AI 编程助手
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 正确认识 AI 编程助手，先自己思考再求助
+  - name: 实验
+    minutes: 25
+    content: 实验 1-1 安装环境并运行第一个程序
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 在自己的电脑上装好 Thonny，能新建、保存、运行程序；确认 Python 的版本，熟悉 Thonny 的编辑区、Sh
+  - name: 实验
+    minutes: 25
+    content: 实验 1-2 打印小店开业海报和个人名片
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 熟练使用 `print` 打印文字和分隔线；会用 `input` 接收输入，并和其他文字拼接后输出
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 108
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。下面的程序运行时，用户输入“陈姐”，Shell 中会显示什么？
+- 简答题：找错并改正。下面的程序有 3 处错误，指出并改正。
+- 简答题：简述交互模式和脚本文件的区别，各适合做什么。
+- 实操题：写一个“会员登记”程序：依次询问顾客的姓名和手机号，然后打印一条欢迎信息，格式如下（假设输入的是“李芳”和“13900002222”）：
+- 实操题：用 AI 编程助手完成一次“对比实验”：自己写一个含有错误的三行程序，先自己按三步读法找出错误，再请 AI 解释，写出你们两个结论的异同（100 字左右）。
+- 实验报告：实验 1-1、实验 1-2、实验 1-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

@@ -1,0 +1,141 @@
+# 第 6 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 6
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出 列表和元组的写法，以及两者最大的区别
+  - 解释 append、insert、pop、remove、del 的区别，以及 `sort()` 和 `sorted()` 的区别
+  skill:
+  - 使用 索引、切片、循环和 `sum`、`max`、`min`、`len` 完成营业额统计等任务
+  - 写出 最基本的列表推导式，用二维列表存放和读取表格数据
+  - 分析 “b = a 之后改 b，a 也变了”的原因，并正确复制列表
+  quality:
+  - 处理销售数据时尊重数据，不随意篡改原始记录
+  - 养成修改数据前先备份（复制）的习惯
+key_points:
+- 列表的创建、索引与切片
+- 增删改：让列表变起来
+- 遍历与统计
+- 列表推导式
+difficulties:
+- point: b = a 不是复制，修改 b 会影响 a
+  solution: 用“两个标签贴在同一个盒子上”的动画演示，再对比 a.copy()
+- point: 二维列表的双重下标和遍历
+  solution: 把二维列表画成表格，先取行再取列，结合小店周销售表练习
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 6 章 列表与元组：批量管理数据的情景导入和第一节，操作交互动画“列表操作台”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: '情景导入：月底了，陈姐想看看这个月每周的经营情况：“哪天卖得最好？哪天最差？有几天超过了平均水平？”
+
+
+      小周想起实验 5-1：用循……'
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 6.1 列表的创建、索引与切片：创建列表、索引与切片、列表可以修改
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会创建列表，掌握索引与切片
+  - name: 讲授与演示
+    minutes: 5
+    content: 6.2 增删改：让列表变起来
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“列表操作台”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 会用增删改方法维护商品清单
+  - name: 讲授
+    minutes: 5
+    content: 6.3 遍历与统计：用 for 遍历列表、统计函数、排序
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会遍历列表并用统计函数和排序
+  - name: 讲授
+    minutes: 5
+    content: 6.4 列表推导式
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会写简单的列表推导式
+  - name: 讲授
+    minutes: 5
+    content: 6.5 二维列表：用列表装一张表
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用二维列表存表格数据
+  - name: 讲授
+    minutes: 5
+    content: 6.6 元组与解包：元组、解包
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 理解元组和解包的用法
+  - name: 讲授
+    minutes: 5
+    content: 6.7 常见坑：b = a 不是复制
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 避开 b = a 的常见坑
+  - name: 拓展
+    minutes: 5
+    content: 6.8 前沿视窗：在 AI 眼里，一切都是一串数字
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 了解 AI 把文字和图片都变成数字列表
+  - name: 实验
+    minutes: 2
+    content: 实验 6-1 一周营业额统计
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 `sum`、`len`、`max`、`min`、`index` 统计列表；会用同一个索引在两个列表中取对应的值；会
+  - name: 实验
+    minutes: 2
+    content: 实验 6-2 购物车菜单程序
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 `while True` 加菜单写一个能反复操作的程序；会用二维列表存放商品表和购物车，会用 append、pop
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。
+- '简答题：找错并改正。下面的程序想输出最便宜的价格，运行时报错 `TypeError: ''NoneType'' object is not subscriptable`，为什么？怎么改？'
+- 简答题：列表和元组有什么相同点和不同点？各举一个适合用列表、适合用元组的例子。
+- 实操题：歌唱比赛有 5 位评委打分，规则是去掉一个最高分和一个最低分，剩下的求平均。输入一行用空格分开的 5 个分数（如 `9.2 8.8 9.5 9.0 8.6`），输出最后得分（保留 2 位小数）。
+- 实操题：有一个列表 `names = ["可乐", "面包", "可乐", "牛奶", "面包"]`，去掉重复的商品名，并保持原来出现的顺序，得到 `['可乐', '面包', '牛奶']`。
+- 实验报告：实验 6-1、实验 6-2、实验 6-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''

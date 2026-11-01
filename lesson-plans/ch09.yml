@@ -1,0 +1,132 @@
+# 第 9 章教案底稿，由 python tools/make_lesson_plan.py draft 生成。
+# 改好“【待填】”的地方，删减或补充其他内容后运行 build。字段说明见 lesson-plans/README.md
+chapter: 9
+online: 5
+offline: 1
+methods:
+- 讲授法
+- 案例教学法
+- 演示法
+- 线上自主学习
+- 实验教学法
+objectives:
+  knowledge:
+  - 说出 绝对路径、相对路径和工作目录的含义，以及 `r`、`w`、`a` 三种打开方式的区别
+  - 解释 为什么读写中文文件要写 `encoding="utf-8"`，`with` 语句有什么好处
+  skill:
+  - 使用 csv 模块读写 CSV 文件，用 json 模块保存和读取字典、列表
+  - 使用 try、except、else、finally 处理常见异常，让程序不因输错而崩溃
+  - 分析 多层 Traceback，找到出错的位置和原因，并能向 AI 助手清楚地描述问题
+  quality:
+  - 读写文件时注意数据安全，不覆盖重要文件，及时备份
+  - 用异常处理让程序更可靠，培养为用户着想的意识
+key_points:
+- 文件路径
+- 读写文本文件
+- 一维、二维数据与 CSV 文件
+- JSON 文件
+difficulties:
+- point: 相对路径和工作目录，导致 FileNotFoundError
+  solution: 现场演示同一程序放在不同文件夹的运行结果，统一约定 labs 文件夹结构
+- point: try-except 的执行流程
+  solution: 用输入非数字的例子逐步演示哪些语句执行、哪些跳过
+process:
+- phase: 课前（线上）
+  steps:
+  - name: 自主预习
+    minutes: 90
+    content: 阅读网页教材第 9 章 文件读写与异常处理的情景导入和第一节，操作交互动画“异常捕获流程”
+    teacher: 在学习平台发布预习任务和预习问题
+    student: 阅读教材、观看课件，在讨论区提出疑问
+    intent: 带着问题进课堂
+- phase: 课中（线下面授 / 直播）
+  steps:
+  - name: 情景导入
+    minutes: 10
+    content: 情景导入：小周的收银程序用了一个星期，陈姐问：“上周三卖了多少钱？”小周愣住了：程序每天晚上一关，当天的数据就全没了。原来，程序运……
+    teacher: 讲述情景，提出本章要解决的问题
+    student: 思考并回答问题，说出自己的经验
+    intent: 联系工作和生活场景，激发学习兴趣
+  - name: 讲授
+    minutes: 5
+    content: 9.1 文件路径：绝对路径与相对路径、工作目录
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 分清绝对路径和相对路径，理解工作目录
+  - name: 讲授
+    minutes: 5
+    content: 9.2 读写文本文件：写文件、读文件
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 with open 读写文本文件
+  - name: 讲授
+    minutes: 5
+    content: 9.3 一维、二维数据与 CSV 文件：一维数据的存储、CSV、用 csv 模块读写
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会用 csv 模块读写一维、二维数据
+  - name: 讲授
+    minutes: 5
+    content: 9.4 JSON 文件
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会读写 JSON 文件保存结构化数据
+  - name: 讲授与演示
+    minutes: 5
+    content: 9.5 异常处理：什么是异常、try-except、else 与 finally、用好异常处理
+    teacher: 讲解要点，结合例子和“算一算”演示；用交互动画“异常捕获流程”课堂演示
+    student: 听讲、跟着计算、操作动画并回答提问
+    intent: 会用 try-except 处理常见异常
+  - name: 讲授
+    minutes: 5
+    content: 9.6 调试：找到并改正错误：读懂多层 Traceback、print 调试与断点、让 AI 帮忙查错的正确问法
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 会读多层 Traceback，用断点调试
+  - name: 拓展
+    minutes: 5
+    content: 9.7 前沿视窗：AI 的“粮食”也存在文件里
+    teacher: 讲解要点，结合例子和“算一算”演示
+    student: 听讲、跟着计算、记录要点
+    intent: 了解 AI 训练数据也存在文件中
+  - name: 实验
+    minutes: 2
+    content: 实验 9-1 把每日销售记录存入 CSV 并读回统计
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 `csv.writer` 把二维列表写入 CSV 文件；会用 `csv.reader`、`csv.DictRead
+  - name: 实验
+    minutes: 2
+    content: 实验 9-2 让收银程序不怕输错
+    teacher: 演示关键步骤，巡视指导，收集常见错误
+    student: 按步骤完成实验，填写记录表
+    intent: 会用 try-except 接住 ValueError，配合循环实现“输错就重新输”；会用 except、finally
+  - name: 课堂练习
+    minutes: 10
+    content: 课后练习中的单选、判断题（在线作答，共 16 题，选做）
+    teacher: 组织学生在网页上作答，讲评错误率高的题
+    student: 在线作答，查看解析
+    intent: 即时检验学习效果
+  - name: 小结
+    minutes: 5
+    content: 用本章知识导图回顾要点，预告下一章
+    teacher: 带领学生梳理知识导图
+    student: 复述本章要点
+    intent: 形成知识结构
+- phase: 课后（线上）
+  steps:
+  - name: 课后巩固
+    minutes: 135
+    content: 完成本章课后练习（在线作答 16 题，简答 / 实操 5 题），提交实验报告
+    teacher: 批改作业和实验报告，在讨论区答疑
+    student: 完成练习，错题点“回看”复习对应小节
+    intent: 巩固知识，形成技能
+homework:
+- 简答题：读程序写结果。分别写出输入 `4`、`x`、`0` 时的输出。
+- 简答题：找错并改正。下面的程序想把三个商品名追加到 goods.txt 中，每个占一行，运行两次后文件里应该有 6 行，但实际只有 1 行，而且三个名字挤在一起。请找出两处错误。
+- 简答题：程序报错时，你想请 AI 助手帮忙。请写出一个好的提问应该包含哪几部分内容，并说明为什么要请 AI“先解释原因，不要直接给出改好的代码”。
+- 实操题：读取配套数据 `labs/data/reviews.txt`（每行一条评价），统计一共有多少条评价、包含“排队”二字的有多少条。
+- 实操题：写一个函数 `safe_divide(a, b)`：返回 a ÷ b 的结果；如果 b 为 0，打印“除数不能为 0”并返回 None。用 `safe_divide(10, 4)` 和 `safe_divide(1, 0)` 测试。
+- 实验报告：实验 9-1、实验 9-2、实验 9-3
+assessment: 课堂练习正确率、课后作业和实验报告计入平时成绩
+reflection: ''
