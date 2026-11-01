@@ -137,6 +137,15 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-路径"></span>路径 | Path | 文件在电脑中的位置 | `D:/python/labs/data/sales_2025.csv` |
+| <span id="g-绝对路径"></span>绝对路径 | Absolute Path | 从盘符开始的完整路径，在哪里运行都指向同一个文件 | `D:/python/notes.txt` |
+| <span id="g-相对路径"></span>相对路径 | Relative Path | 从工作目录出发的路径，`..` 表示上一级文件夹 | `../data/sales_2025.csv` |
+| <span id="g-工作目录"></span>工作目录 | Working Directory | 程序运行时的“当前文件夹”，相对路径从这里出发 | `os.getcwd()` 查看 |
+| <span id="g-CSV"></span>CSV | Comma-Separated Values | 每行一条记录、各列用逗号分隔的纯文本表格文件 | `日期,商品名称,金额` |
+| <span id="g-表头"></span>表头 | Header | CSV 或表格的第一行，写着各列的名字 | `日期,时间,单号,……` |
+| <span id="g-异常"></span>异常 | Exception | 程序运行时发生的错误，可以用 try-except 处理 | `ValueError`、`ZeroDivisionError` |
+| <span id="g-断点"></span>断点 | Breakpoint | 调试时让程序暂停的位置，可以查看当时的变量 | Thonny 中单击行号设置 |
+| <span id="g-JSON-Lines"></span>JSON Lines | JSON Lines | 每行一个 JSON 值的文本格式，扩展名 .jsonl，常用于大模型训练数据 | `{"问题": "…", "回答": "…"}` |
 
 ## 第 10 章 模块、第三方库与面向对象入门
 

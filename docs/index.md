@@ -60,7 +60,7 @@
 | [第 6 章 列表与元组：批量管理数据](chapters/06-lists/index.md) | 实验 6-1 ★ 一周营业额统计 { #lab6-1 }<br>实验 6-2 ★ 购物车菜单程序 { #lab6-2 }<br>实验 6-3 ☆ 会员抽奖程序 { #lab6-3 } |
 | [第 7 章 字典与集合：按名字找数据](chapters/07-dicts/index.md) | 实验 7-1 ★ 商品价格表与收银 { #lab7-1 }<br>实验 7-2 ★ 顾客评价词频统计 { #lab7-2 }<br>实验 7-3 ☆ 两天顾客名单对比 { #lab7-3 } |
 | [第 8 章 函数：把代码打包复用](chapters/08-functions/index.md) | 实验 8-1 ★ 把收银程序改写成函数 { #lab8-1 }<br>实验 8-2 ★ 小店工具函数库与 assert 自测 { #lab8-2 }<br>实验 8-3 ☆ 按销量、价格给商品排序 { #lab8-3 } |
-| [第 9 章 文件读写与异常处理](chapters/09-files/index.md) | 实验 9-1 ★ 实验名称<br>实验 9-2 ★ 实验名称<br>实验 9-3 ★ 实验名称 |
+| [第 9 章 文件读写与异常处理](chapters/09-files/index.md) | 实验 9-1 ★ 把每日销售记录存入 CSV 并读回统计 { #lab9-1 }<br>实验 9-2 ★ 让收银程序不怕输错 { #lab9-2 }<br>实验 9-3 ☆ 会员通讯录存成 JSON { #lab9-3 } |
 | [第 10 章 模块、第三方库与面向对象入门](chapters/10-modules-oop/index.md) | 实验 10-1 ★ 实验名称<br>实验 10-2 ★ 实验名称<br>实验 10-3 ★ 实验名称 |
 | [第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib](chapters/11-data-libs/index.md) | 实验 11-1 ★ 实验名称<br>实验 11-2 ★ 实验名称<br>实验 11-3 ★ 实验名称 |
 | [第 12 章 Python 与人工智能：综合项目](chapters/12-ai-project/index.md) | 实验 12-1 ★ 实验名称<br>实验 12-2 ★ 实验名称<br>实验 12-3 ★ 实验名称 |
