@@ -314,7 +314,7 @@ print(3 + 2 * 4, (3 + 2) * 4, 10 - 4 - 3)
 
 这些叫[**复合赋值运算符**](../../appendix/glossary.md#g-复合赋值运算符 "把运算和赋值合在一起的简写，如 +=、-=、*="){ .term }（Augmented Assignment Operator）。注意 Python 没有其他语言里的 `x++` 写法。
 
-## 2.5 类型转换与 input
+## 2.5 类型转换与 input { #25 }
 
 ### 2.5.1 input 得到的永远是字符串 { #251 }
 

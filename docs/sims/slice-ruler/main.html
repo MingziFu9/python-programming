@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字符串切片尺</title>
+<link rel="stylesheet" href="../common/sim.css">
+<style>
+.ruler { display:flex; flex-wrap:wrap; gap:0; margin:10px 0 4px; }
+.cell { width:44px; text-align:center; }
+.cell .ch { border:1px solid var(--line); height:40px; line-height:40px; font-size:20px; background:#fafafa; transition:all .2s; }
+.cell.sel .ch { background:#c5cae9; border-color:var(--accent); font-weight:bold; }
+.cell.first .ch { box-shadow: inset 0 -4px 0 var(--warn); }
+.cell .pi { color:var(--accent); font-size:12px; } .cell .ni { color:var(--warn); font-size:12px; }
+.ctl { display:grid; grid-template-columns:6.5em 1fr 4em 5em; gap:6px; align-items:center; font-size:13px; margin:3px 0; }
+.code { font-size:18px; margin-top:6px; } .res { font-size:18px; color:var(--pos); font-weight:bold; }
+</style>
+</head>
+<body>
+<h1>字符串切片尺</h1>
+<div class="sub">拖动滑块改变起点、终点和步长，看 <code>s[起点:终点:步长]</code> 取出哪几个字。蓝色数字是正向索引（从 0 开始），橙色是反向索引（从 -1 开始）。终点那个字<b>不取</b>。</div>
+<div class="row ex"><span class="lbl">换一个字符串：</span>
+  <button data-s="街坊便利店欢迎您">街坊便利店欢迎您</button>
+  <button data-s="13800138000">13800138000</button>
+  <button data-s="2025-03-07">2025-03-07</button>
+  <button data-s="photo.jpg">photo.jpg</button>
+</div>
+<div class="ruler" id="ruler"></div>
+<div class="ctl"><span>起点</span><input type="range" id="a"><span id="av"></span><label><input type="checkbox" id="an"> 留空</label></div>
+<div class="ctl"><span>终点（不含）</span><input type="range" id="b"><span id="bv"></span><label><input type="checkbox" id="bn"> 留空</label></div>
+<div class="ctl"><span>步长</span><input type="range" id="c" min="-3" max="3"><span id="cv"></span><span></span></div>
+<div class="code">s<code id="expr"></code> → <span class="res" id="res"></span></div>
+<div class="msg" id="msg"></div>
+<div class="row ex"><span class="lbl">常用写法：</span>
+  <button data-p="0,4,1">前 4 个 [:4]</button>
+  <button data-p="-3,n,1">后 3 个 [-3:]</button>
+  <button data-p="n,n,-1">倒过来 [::-1]</button>
+  <button data-p="n,n,2">隔一个取 [::2]</button>
+  <button data-p="3,-4,1">去掉前 3 和后 4 [3:-4]</button>
+</div>
+<script>
+(function () {
+  var s = "街坊便利店欢迎您";
+  var $ = function (id) { return document.getElementById(id); };
+  // 按 Python 的规则计算切片，起点、终点为 null 表示留空
+  function pySlice(str, a, b, c) {
+    var n = str.length, out = [], idx = [];
+    if (c > 0) {
+      a = a === null ? 0 : (a < 0 ? Math.max(a + n, 0) : Math.min(a, n));
+      b = b === null ? n : (b < 0 ? Math.max(b + n, 0) : Math.min(b, n));
+      for (var i = a; i < b; i += c) idx.push(i);
+    } else {
+      a = a === null ? n - 1 : (a < 0 ? Math.max(a + n, -1) : Math.min(a, n - 1));
+      b = b === null ? -1 : (b < 0 ? Math.max(b + n, -1) : Math.min(b, n - 1));
+      for (var j = a; j > b; j += c) idx.push(j);
+    }
+    idx.forEach(function (k) { out.push(str[k]); });
+    return { text: out.join(""), idx: idx };
+  }
+  function setRanges() {
+    var n = s.length;
+    ["a", "b"].forEach(function (k) { $(k).min = -n; $(k).max = n; });
+  }
+  function render() {
+    var n = s.length;
+    var a = $("an").checked ? null : +$("a").value;
+    var b = $("bn").checked ? null : +$("b").value;
+    var c = +$("c").value;
+    if (c === 0) { c = 1; $("c").value = 1; }
+    $("a").disabled = $("an").checked; $("b").disabled = $("bn").checked;
+    $("av").textContent = a === null ? "（空）" : a;
+    $("bv").textContent = b === null ? "（空）" : b;
+    $("cv").textContent = c;
+    var r = pySlice(s, a, b, c);
+    var html = "";
+    for (var i = 0; i < n; i++) {
+      var cls = "cell" + (r.idx.indexOf(i) >= 0 ? " sel" : "") + (r.idx[0] === i ? " first" : "");
+      html += '<div class="' + cls + '"><div class="pi">' + i + '</div><div class="ch">' + s[i] + '</div><div class="ni">' + (i - n) + "</div></div>";
+    }
+    $("ruler").innerHTML = html;
+    var expr = "[" + (a === null ? "" : a) + ":" + (b === null ? "" : b) + (c === 1 ? "" : ":" + c) + "]";
+    $("expr").textContent = expr;
+    $("res").textContent = "'" + r.text + "'";
+    var msg = "取出了 " + r.idx.length + " 个字符，依次是第 " + (r.idx.length ? r.idx.join("、") : "（无）") + " 号。";
+    if (!r.idx.length) msg += " 结果是空字符串：起点已经在终点的" + (c > 0 ? "右边" : "左边") + "了。";
+    if (c < 0) msg += " 步长为负数时从右往左取，起点要在终点的右边。";
+    $("msg").textContent = msg;
+  }
+  function load(str) { s = str; setRanges(); $("a").value = 0; $("b").value = Math.min(4, s.length); $("c").value = 1; $("an").checked = false; $("bn").checked = false; render(); }
+  document.querySelectorAll("[data-s]").forEach(function (b) { b.onclick = function () { load(b.dataset.s); }; });
+  document.querySelectorAll("[data-p]").forEach(function (btn) {
+    btn.onclick = function () {
+      var p = btn.dataset.p.split(",");
+      $("an").checked = p[0] === "n"; $("bn").checked = p[1] === "n";
+      if (p[0] !== "n") $("a").value = p[0];
+      if (p[1] !== "n") $("b").value = p[1];
+      $("c").value = p[2]; render();
+    };
+  });
+  ["a", "b", "c", "an", "bn"].forEach(function (k) { $(k).oninput = render; $(k).onchange = render; });
+  load(s);
+})();
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>
