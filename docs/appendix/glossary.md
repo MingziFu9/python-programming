@@ -182,3 +182,14 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-机器学习"></span>机器学习 | Machine Learning | 不靠人写规则，而是让模型从数据中自己总结规律，再用规律对新数据做判断 | 用 32 条标好的评价训练好评、差评分类模型 |
+| <span id="g-分词"></span>分词 | Word Segmentation | 把一句中文切分成一个个词的过程 | `jieba.lcut("包子很香")` 得到 `['包子', '很', '香']` |
+| <span id="g-文本分类"></span>文本分类 | Text Classification | 让程序自动判断一段文字属于哪一类 | 判断评价是好评还是差评；识别垃圾短信 |
+| <span id="g-API"></span>API | Application Programming Interface | 程序之间约定好格式、互相调用功能的方式，也叫应用程序接口 | 程序通过 API 把问题发给大模型服务器 |
+| <span id="g-API-Key"></span>API Key | API Key | 服务商发给用户、调用 API 时用来证明身份的一串密钥，要妥善保管 | 放在请求头 `Authorization: Bearer 密钥` 中 |
+| <span id="g-HTTP-状态码"></span>HTTP 状态码 | HTTP Status Code | 服务器回复请求时附带的三位数字，表示请求的结果 | 200 成功，401 认证失败，429 请求太频繁 |
+| <span id="g-提示词"></span>提示词 | Prompt | 发给大模型的问题或指令 | “你是便利店经营助理，请根据以下数据写本周小结……” |
+| <span id="g-大语言模型"></span>大语言模型 | Large Language Model, LLM | 用海量文字训练出来、能理解和生成自然语言的大型 AI 模型，简称大模型 | DeepSeek、通义千问 |
+| <span id="g-智能体"></span>智能体 | AI Agent | 能根据任务自己决定下一步、调用工具（读写文件、运行命令等）并反复尝试直到完成的 AI 程序 | AI 编程智能体自己修改代码、运行测试 |
+| <span id="g-需求分析"></span>需求分析 | Requirements Analysis | 开发前和用户一起弄清楚“程序要做什么”，并写成清单 | 列出小店管理助手要有的 4 个功能 |
+

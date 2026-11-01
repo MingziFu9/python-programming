@@ -63,6 +63,7 @@ nav:
     - "异常捕获流程": sims/try-except/index.md
     - "类与对象：一个模具压出多个商品": sims/class-object/index.md
     - "pandas 筛选与分组": sims/pandas-group/index.md
+    - "大模型接口：一次请求与回复": sims/llm-request/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
   - "期末模拟卷": mock-exam.md

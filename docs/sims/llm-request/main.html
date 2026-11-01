@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大模型接口：一次请求与回复</title>
+<link rel="stylesheet" href="../common/sim.css">
+<style>
+.wrap { display:grid; grid-template-columns: 1fr 1.25fr; gap:12px; }
+@media (max-width: 680px) { .wrap { grid-template-columns: 1fr; } }
+.form { display:grid; grid-template-columns: 5em 1fr; gap:6px; align-items:center; font-size:13px; }
+.form input, .form select, .form textarea { font-size:13px; padding:3px 6px; width:100%; }
+.form textarea { height:5.2em; }
+pre.j { margin:4px 0 0; font-family:"JetBrains Mono",Consolas,monospace; font-size:12px; line-height:1.5; background:#f5f7ff; border:1px solid var(--line); border-radius:6px; padding:6px 8px; white-space:pre-wrap; word-break:break-all; min-height:3em; font-variant-ligatures:none; }
+pre.j.resp { background:#f1f8e9; }
+pre.j.err { background:#ffebee; }
+.k { color:#3949ab; } .s { color:#2e7d32; } .hl { background:#fff59d; border-radius:2px; }
+.flow { display:flex; align-items:center; gap:6px; margin:8px 0; font-size:12.5px; flex-wrap:wrap; }
+.node { border:2px solid var(--line); border-radius:8px; padding:4px 8px; background:#fff; transition:all .25s; }
+.node.on { border-color:var(--warn); background:#fff3e0; }
+.arrow { color:var(--muted); }
+.pkt { display:inline-block; transition:transform .6s; }
+.final { font-size:13px; background:#263238; color:#e0f2f1; border-radius:6px; padding:6px 8px; white-space:pre-wrap; min-height:3em; margin-top:6px; font-family:"JetBrains Mono",Consolas,monospace; }
+.stepno { display:inline-block; min-width:1.4em; text-align:center; border-radius:50%; background:var(--accent); color:#fff; font-size:12px; margin-right:4px; }
+</style>
+</head>
+<body>
+<h1>大模型接口：一次请求与回复</h1>
+<div class="sub">左边填好密钥、模型和问题，按“下一步”看程序怎样把问题打包成 JSON 发给服务器，服务器又回复了什么，最后怎样从回复中一层层取出文字。回复内容与配套的模拟服务器 mock_llm_server.py 一致（按模板生成，不是真正的大模型）。</div>
+<div class="wrap">
+  <div>
+    <div class="form">
+      <span>API Key</span><input id="key" value="test-key">
+      <span>模型</span><select id="model"><option>mock-model</option><option>deepseek-flash</option></select>
+      <span>问题</span><textarea id="q">请根据数据写本周经营小结：
+营业额：2446.9 元
+订单数：101 单</textarea>
+      <span>网络</span><select id="net"><option value="ok">服务器已启动</option><option value="down">服务器没启动 / 断网</option></select>
+    </div>
+    <div class="row"><button id="prev">上一步</button><button id="next" class="main">下一步</button><button id="reset">重来</button></div>
+    <div class="row ex"><span class="lbl">试试：</span><button id="nokey">清空 API Key</button><button id="down">服务器没启动</button><button id="normal">恢复正常</button></div>
+    <div class="flow"><span class="node" id="n1">你的程序</span><span class="arrow" id="a1">──请求──▶</span><span class="node" id="n2">大模型服务器</span><span class="arrow" id="a2">◀──回复──</span></div>
+    <div class="msg" id="msg"></div>
+  </div>
+  <div>
+    <div><span class="stepno">1</span><b id="t1">请求</b></div>
+    <pre class="j" id="req"></pre>
+    <div style="margin-top:6px"><span class="stepno">2</span><b id="t2">回复</b></div>
+    <pre class="j resp" id="resp"></pre>
+    <div style="margin-top:6px"><span class="stepno">3</span><b>取出内容</b> <code id="path"></code></div>
+    <div class="final" id="final"></div>
+  </div>
+</div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var step = 0;
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function js(s) { return JSON.stringify(s).slice(1, -1); }   // 和 Python json.dumps(ensure_ascii=False) 一样转义换行
+  function mask(k) { return k.length <= 4 ? k : k.slice(0, 4) + "****"; }
+  // 和 mock_llm_server.py 相同的模板
+  function answer(q) {
+    var lines = q.split("\n").map(function (l) { return l.trim(); }).filter(function (l) { var i = l.indexOf("："); return i > 0 && i <= 8; });
+    var facts = lines.length ? lines.join("；") : "未提供数据";
+    return "【本周经营小结】\n1. 总体情况：" + facts + "。\n2. 亮点：销售额最高的商品可以继续保证货源，周末客流大，可提前备货。\n3. 建议：针对顾客反映的问题（如排队）安排高峰时段加开收银。\n（以上内容由模拟服务器按模板生成，仅用于练习。）";
+  }
+  function render() {
+    var key = $("key").value.trim(), model = $("model").value, q = $("q").value, down = $("net").value === "down";
+    var bad = !key;
+    // 第 1 步：请求
+    var req = "";
+    if (step >= 1) {
+      req = '<span class="k">POST</span> /chat/completions\n' +
+        '<span class="k">Authorization:</span> Bearer ' + esc(mask(key)) + '\n' +
+        '<span class="k">Content-Type:</span> application/json\n\n' +
+        '{"<span class="k">model</span>": "<span class="s">' + esc(model) + '</span>",\n' +
+        ' "<span class="k">messages</span>": [{"<span class="k">role</span>": "<span class="s">user</span>",\n' +
+        '               "<span class="k">content</span>": "<span class="s">' + esc(js(q)) + '</span>"}],\n' +
+        ' "<span class="k">temperature</span>": 0.7}';
+    }
+    $("req").innerHTML = req || '<span class="note">按“下一步”组装请求。</span>';
+    // 第 2 步：回复
+    var resp = $("resp"), content = null, code = 0;
+    resp.className = "j resp";
+    if (step >= 2) {
+      if (down) {
+        resp.className = "j err";
+        resp.innerHTML = "（没有回复）\nrequests.exceptions.ConnectionError：连不上服务器";
+      } else if (bad) {
+        code = 401; resp.className = "j err";
+        resp.innerHTML = '状态码 <b>401</b>\n{"<span class="k">error</span>": {"<span class="k">message</span>": "<span class="s">缺少或错误的 API Key</span>", "<span class="k">type</span>": "<span class="s">authentication_error</span>"}}';
+      } else {
+        code = 200; content = answer(q);
+        var hl = step >= 3;
+        resp.innerHTML = '状态码 <b>200</b>\n{"<span class="k">id</span>": "chatcmpl-mock-…",\n "<span class="k">object</span>": "chat.completion",\n "<span class="k">model</span>": "' + esc(model) + '",\n' +
+          ' "' + (hl ? '<span class="hl">' : '') + '<span class="k">choices</span>' + (hl ? '</span>' : '') + '": [{"<span class="k">index</span>": 0,\n' +
+          '   "' + (hl ? '<span class="hl">' : '') + '<span class="k">message</span>' + (hl ? '</span>' : '') + '": {"<span class="k">role</span>": "assistant",\n' +
+          '      "' + (hl ? '<span class="hl">' : '') + '<span class="k">content</span>' + (hl ? '</span>' : '') + '": "<span class="s">' + esc(js(content)) + '</span>"},\n' +
+          '   "<span class="k">finish_reason</span>": "stop"}],\n' +
+          ' "<span class="k">usage</span>": {"<span class="k">prompt_tokens</span>": ' + q.length + ', "<span class="k">completion_tokens</span>": ' + content.length + ', "<span class="k">total_tokens</span>": ' + (q.length + content.length) + '}}';
+      }
+    } else resp.innerHTML = "";
+    // 第 3 步：取出内容
+    $("path").textContent = step >= 3 && content !== null ? 'result["choices"][0]["message"]["content"]' : "";
+    $("final").textContent = step >= 3 ? (content !== null ? content : (down ? "连接失败：请检查模拟服务器是否已启动，或网络、地址是否正确" : "请求失败，状态码 401 ： 缺少或错误的 API Key")) : "";
+    // 流程图
+    $("n1").className = "node" + (step === 1 || step === 3 ? " on" : "");
+    $("n2").className = "node" + (step === 2 && !down ? " on" : "");
+    var msgs = [
+      "API Key 是服务商发给你的“通行证”，每次请求都要带上；问题放在 messages 列表里，role 为 user。",
+      "第 1 步：程序把 Python 字典转成 JSON 文本，连同写着密钥的请求头，用 POST 发给服务器。图中密钥只显示前 4 位，真实的密钥不要截图、不要发给别人。",
+      down ? "第 2 步：服务器没启动或断网，请求根本没送到，requests 抛出 ConnectionError，要用 try-except 接住。"
+           : bad ? "第 2 步：没有带上正确的密钥，服务器拒绝了请求，返回状态码 401 和一段错误说明。"
+           : "第 2 步：服务器回复状态码 200（成功）和一段 JSON。回复的文字藏在好几层里面，usage 记录了用量（按 token 计费）。",
+      content !== null ? "第 3 步：resp.json() 把 JSON 变成字典，再按黄色的路径一层层取：choices 是列表取第 0 个，再取 message，再取 content。"
+                       : "第 3 步：出错时没有 choices 可取。程序先判断状态码或捕获异常，给出容易看懂的提示，而不是直接崩溃。"
+    ];
+    $("msg").textContent = msgs[step];
+    $("prev").disabled = step === 0; $("next").disabled = step === 3;
+  }
+  $("next").onclick = function () { if (step < 3) step++; render(); };
+  $("prev").onclick = function () { if (step > 0) step--; render(); };
+  $("reset").onclick = function () { step = 0; render(); };
+  $("nokey").onclick = function () { $("key").value = ""; $("net").value = "ok"; step = 0; render(); };
+  $("down").onclick = function () { $("key").value = "test-key"; $("net").value = "down"; step = 0; render(); };
+  $("normal").onclick = function () { $("key").value = "test-key"; $("net").value = "ok"; step = 0; render(); };
+  ["key", "model", "q", "net"].forEach(function (id) { $(id).oninput = $(id).onchange = function () { step = 0; render(); }; });
+  render();
+})();
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>

@@ -21,4 +21,5 @@ description: 本书配套的交互动画，可以在浏览器里直接操作，�
 | 第 9 章 | [异常捕获流程](try-except/index.md) | 用三组不同的输入单步执行 try-except-else-finally 程序，观察出错时跳过哪些行、哪个 except 接住了异常、else 和 finally 何时执行 |
 | 第 10 章 | [类与对象：一个模具压出多个商品](class-object/index.md) | 用类 Goods 创建多个商品对象，观察每个对象各自拥有的属性，点击调用方法，理解类与对象、__init__ 和 self |
 | 第 11 章 | [pandas 筛选与分组](pandas-group/index.md) | 选择筛选条件、分组列和汇总方式，分三步观察 pandas 先筛选行、再分组、最后汇总的过程，输出与 pandas 实际运行结果一致 |
+| 第 12 章 | [大模型接口：一次请求与回复](llm-request/index.md) | 分三步观察程序怎样把问题打包成 JSON 发给大模型服务器、服务器回复什么、怎样从回复中取出文字，并体验密钥错误和连接失败两种情况 |
 <!-- sims:end -->
