@@ -56,6 +56,7 @@ nav:
     - "变量：给数据贴标签": sims/variable-labels/index.md
     - "字符串切片尺": sims/slice-ruler/index.md
     - "分支流程走一遍": sims/branch-flow/index.md
+    - "循环追踪：变量一步步变化": sims/loop-trace/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
   - "期末模拟卷": mock-exam.md

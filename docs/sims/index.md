@@ -14,4 +14,5 @@ description: 本书配套的交互动画，可以在浏览器里直接操作，�
 | 第 2 章 | [变量：给数据贴标签](variable-labels/index.md) | 单步执行赋值语句，看变量的值怎样变化，理解“赋值不是相等”“变量不会自动重算” |
 | 第 3 章 | [字符串切片尺](slice-ruler/index.md) | 拖动起点、终点、步长三个滑块，看切片取出哪些字符，理解“终点不取”和负数索引 |
 | 第 4 章 | [分支流程走一遍](branch-flow/index.md) | 单步执行 if-else 和 if-elif-else 程序，输入不同的值，看程序走了哪条路、跳过了哪些分支 |
+| 第 5 章 | [循环追踪：变量一步步变化](loop-trace/index.md) | 单步执行 for 循环、while 循环和 break、continue，观察每一圈变量的变化，理解累加器、计数器和找最大值 |
 <!-- sims:end -->

@@ -77,6 +77,15 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-循环"></span>循环 | Loop | 让一段代码重复执行的结构，Python 有 while 和 for 两种 | `for i in range(3):` |
+| <span id="g-循环体"></span>循环体 | Loop Body | 循环语句下面缩进的、每圈都要执行的代码 | while 下面缩进的几行 |
+| <span id="g-计数器"></span>计数器 | Counter | 记录次数的变量，要有初始值、条件和更新三要素 | `count += 1` |
+| <span id="g-死循环"></span>死循环 | Infinite Loop | 条件永远成立又没有 break、停不下来的循环 | 忘了写 `count += 1` |
+| <span id="g-循环变量"></span>循环变量 | Loop Variable | for 循环每圈自动取出的那个值所放的变量 | `for ch in "街坊":` 中的 `ch` |
+| <span id="g-累加器"></span>累加器 | Accumulator | 循环前清零、每圈加上一个值，用来求和的变量 | `total += money` |
+| <span id="g-蒙特卡洛方法"></span>蒙特卡洛方法 | Monte Carlo Method | 用大量随机数模拟一件事，从而估算结果的方法 | 随机撒点估算圆周率 |
+| <span id="g-嵌套循环"></span>嵌套循环 | Nested Loop | 循环里面再写循环，外层转一圈、内层转一整遍 | 九九乘法表 |
+| <span id="g-二分查找"></span>二分查找 | Binary Search | 每次猜剩下范围的正中间，把范围缩小一半的查找方法 | 1～100 最多猜 7 次 |
 
 ## 第 6 章 列表与元组：批量管理数据
 
