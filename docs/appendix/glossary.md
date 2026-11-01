@@ -62,6 +62,16 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-比较运算符"></span>比较运算符 | Comparison Operator | 比较两个值、结果为 True 或 False 的运算符，共 6 个 | `>`、`<`、`>=`、`<=`、`==`、`!=` |
+| <span id="g-布尔表达式"></span>布尔表达式 | Boolean Expression | 结果是 True 或 False 的式子，常用作 if 的条件 | `total >= 100` |
+| <span id="g-顺序结构"></span>顺序结构 | Sequential Structure | 程序从上往下一行一行执行的结构 | 没有 if、循环的程序 |
+| <span id="g-分支结构"></span>分支结构 | Branch Structure | 根据条件决定执行哪些代码、跳过哪些代码的结构 | if、if-else、if-elif-else |
+| <span id="g-条件表达式"></span>条件表达式 | Conditional Expression | 用一行写成的二选一：条件成立取前一个值，否则取后一个 | `"箱" if qty >= 12 else "瓶"` |
+| <span id="g-逻辑运算符"></span>逻辑运算符 | Logical Operator | 把几个条件组合起来的运算符：and 并且、or 或者、not 取反 | `age >= 18 and member` |
+| <span id="g-真值测试"></span>真值测试 | Truth Value Testing | 把任意值当作真或假：False、None、0、空字符串等为假，其余为真 | `if name:` 表示 name 不为空 |
+| <span id="g-流程图"></span>流程图 | Flowchart | 用起止框、输入输出框、处理框、判断框和箭头画出程序步骤的图 | 判断框是菱形 |
+| <span id="g-嵌套"></span>嵌套 | Nesting | 在一个语句的代码块里再写同类语句，如 if 里面再写 if | 会员里再分满 50 和不满 50 |
+| <span id="g-输入检查"></span>输入检查 | Input Validation | 在使用输入之前先检查它是否合法，不合法就提示 | 先 `isdigit()` 再 `int()` |
 
 ## 第 5 章 循环：让程序重复做事
 

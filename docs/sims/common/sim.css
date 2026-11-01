@@ -44,3 +44,5 @@ svg text { font-family:inherit; }
 .st-frame { margin-bottom:6px; }
 .st-fname { font-size:12px; color:var(--accent); font-weight:600; }
 tr.st-chg td { background:#fff8e1; }
+/* 关闭等宽字体的连字，避免 >= == 显示成 ≥ ═，零基础学生会照着抄错 */
+code, .mono, .st-code, .st-out, pre, textarea { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }

@@ -95,3 +95,5 @@ a.term[data-def]:hover::after {
   font-size: .72rem; background: #f1f8e9; color: #1b5e20; border-radius: 4px; border-left: 4px solid #66bb6a;
 }
 .tryit-out.tryit-err { background: #fff3f3; color: #b71c1c; border-left-color: #e53935; }
+/* 关闭等宽字体的连字，避免 >= == 显示成 ≥ ═ */
+code, pre, kbd, .tryit-code, .tryit-out { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
