@@ -73,3 +73,25 @@ a.term[data-def]:hover::after {
   background-color: #8e24aa; -webkit-mask-image: var(--md-admonition-icon--cert); mask-image: var(--md-admonition-icon--cert);
 }
 
+
+/* ===== “试一试”：浏览器内运行 Python（tryit.js） ===== */
+.tryit { margin: 1em 0; }
+.tryit > .highlight, .tryit > pre { margin-bottom: .2em; }
+.tryit-bar { display: flex; gap: .5em; margin: .3em 0; }
+.tryit-btn {
+  padding: .2em .9em; border-radius: 4px; cursor: pointer; font-size: .72rem;
+  border: 1px solid #2e7d32; background: #2e7d32; color: #fff;
+}
+.tryit-btn:disabled { opacity: .5; cursor: default; }
+.tryit-plain { background: transparent; color: #2e7d32; }
+.tryit-code {
+  width: 100%; box-sizing: border-box; padding: .6em .8em; margin-top: .4em;
+  font-family: var(--md-code-font-family, monospace); font-size: .75rem; line-height: 1.5;
+  border: 1px solid #a5d6a7; border-radius: 4px; background: var(--md-code-bg-color); color: var(--md-code-fg-color);
+  tab-size: 4; resize: vertical;
+}
+.tryit-out {
+  margin: .2em 0 0; padding: .6em .8em; min-height: 2em; white-space: pre-wrap;
+  font-size: .72rem; background: #f1f8e9; color: #1b5e20; border-radius: 4px; border-left: 4px solid #66bb6a;
+}
+.tryit-out.tryit-err { background: #fff3f3; color: #b71c1c; border-left-color: #e53935; }

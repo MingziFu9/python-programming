@@ -1,8 +1,8 @@
 # 站点名、描述、网址和 nav 由 python tools/course.py sync 根据 course.yml 生成，请改 course.yml，不要手改这几项
-site_name: 课程名称
-site_description: 面向成人教育人工智能技术应用专业（专科）的《课程名称》教材，每章配套动手实验
-site_url: https://mingzifu9.github.io/ai-textbook-template/
-repo_url: https://github.com/MingziFu9/ai-textbook-template
+site_name: Python 编程
+site_description: 面向成人教育人工智能技术应用专业（专科）的《Python 编程》教材，零基础起步，12 章 36 个动手实验
+site_url: https://mingzifu9.github.io/python-programming/
+repo_url: https://github.com/MingziFu9/python-programming
 docs_dir: docs
 theme:
   name: material
@@ -33,19 +33,32 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - javascripts/book.js
+  - javascripts/tryit.js
   - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
 nav:
   - 首页: index.md
   - 课程描述: course-description.md
-  - "第 1 章 示例章": chapters/01-sample/index.md
+  - "第 1 章 初识 Python：搭好环境，写出第一个程序": chapters/01-getting-started/index.md
+  - "第 2 章 变量、数据类型与运算": chapters/02-variables/index.md
+  - "第 3 章 字符串：处理文字信息": chapters/03-strings/index.md
+  - "第 4 章 条件判断：让程序做选择": chapters/04-conditions/index.md
+  - "第 5 章 循环：让程序重复做事": chapters/05-loops/index.md
+  - "第 6 章 列表与元组：批量管理数据": chapters/06-lists/index.md
+  - "第 7 章 字典与集合：按名字找数据": chapters/07-dicts/index.md
+  - "第 8 章 函数：把代码打包复用": chapters/08-functions/index.md
+  - "第 9 章 文件读写与异常处理": chapters/09-files/index.md
+  - "第 10 章 模块、第三方库与面向对象入门": chapters/10-modules-oop/index.md
+  - "第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib": chapters/11-data-libs/index.md
+  - "第 12 章 Python 与人工智能：综合项目": chapters/12-ai-project/index.md
   - 交互动画:
     - sims/index.md
     - "示例动画：点击计数器": sims/example-counter/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
+  - "期末模拟卷": mock-exam.md
   - 证书考点对照: certificate.md
   - 附录:
-    - "附录 A Python 速查": appendix/a-python.md
-    - "附录 B 工具库速查": appendix/b-libraries.md
-    - "附录 C 实验环境与数据说明": appendix/c-environment.md
+    - "附录 A 编程环境安装与常见问题": appendix/a-environment.md
+    - "附录 B 常用内置函数与方法速查": appendix/b-reference.md
+    - "附录 C 常见报错速查表": appendix/c-errors.md
     - "附录 D 术语表": appendix/glossary.md

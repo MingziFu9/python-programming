@@ -7,41 +7,52 @@
 # 也从这里读取课程名、学时等信息
 # ============================================================
 
-title: 课程名称                      # 书名，例如：机器学习
-description: 面向成人教育人工智能技术应用专业（专科）的《课程名称》教材，每章配套动手实验
+title: Python 编程                     # 书名
+description: 面向成人教育人工智能技术应用专业（专科）的《Python 编程》教材，零基础起步，12 章 36 个动手实验
 audience: 成人教育（继续教育）人工智能技术应用专业专科学生，多为在职学习者
 github_user: MingziFu9                # 网址 https://<github_user>.github.io/<repo>/
-repo: ai-textbook-template            # GitHub 仓库名（用模板新建后改成本课的，如 ml-textbook）
+repo: python-programming            # GitHub 仓库名（用模板新建后改成本课的，如 ml-textbook）
 
 credits: 4                            # 学分
-hours: {theory: 60, lab: 12}          # 学时：理论 + 实验
-semester: 3                           # 开课学期
+hours: {theory: 48, lab: 24}          # 学时：理论 + 实验
+semester: 1                           # 开课学期
 exam: 闭卷                            # 期末考核方式
 labs_per_chapter: 3                   # 每章实验数；0 表示没有实验
 lab_section: 本章实验                 # 实验部分的二级标题；导论用“在线体验”
 lab_word: 实验                        # 每个实验的三级标题前缀（### 实验 N-M）；导论用“体验”
 frontier_title: 前沿视窗              # 每章“前沿”小节的名称，导论用“身边的 AI”
-certificates:                         # 对应的职业证书；没有证书的课程写成 certificates: []，导航里就不显示“证书考点对照”页
-  - name: 证书名称（级别）
-    issuer: 发证机构，标准或考纲名称（年份）
+certificates:                         # 对应的职业证书
+  - name: 信息技术水平-人工智能（Python）
+    issuer: 工业和信息化部教育与考试中心（未找到公开考纲，考点按教育部考试中心《全国计算机等级考试二级 Python 语言程序设计考试大纲（2025 年版）》对照）
 
 # 章节：dir 是 docs/chapters/ 下的文件夹名（两位章号开头），short 用于学习图谱等窄处
 # theory / lab 是本章学时；labs 可单独覆盖本章实验数；offline 可指定本章线下学时（不写则按 online_ratio 分）
 chapters:
-  - {dir: 01-sample, title: 示例章, short: 示例章, theory: 5, lab: 1}
+  - {dir: 01-getting-started, title: "初识 Python：搭好环境，写出第一个程序", short: "初识 Python", theory: 4, lab: 2, offline: 2}
+  - {dir: 02-variables, title: "变量、数据类型与运算", short: "变量与运算", theory: 4, lab: 2, offline: 1}
+  - {dir: 03-strings, title: "字符串：处理文字信息", short: "字符串", theory: 4, lab: 2, offline: 1}
+  - {dir: 04-conditions, title: "条件判断：让程序做选择", short: "条件判断", theory: 4, lab: 2, offline: 1}
+  - {dir: 05-loops, title: "循环：让程序重复做事", short: "循环", theory: 4, lab: 2, offline: 1}
+  - {dir: 06-lists, title: "列表与元组：批量管理数据", short: "列表与元组", theory: 4, lab: 2, offline: 1}
+  - {dir: 07-dicts, title: "字典与集合：按名字找数据", short: "字典与集合", theory: 4, lab: 2, offline: 1}
+  - {dir: 08-functions, title: "函数：把代码打包复用", short: "函数", theory: 4, lab: 2, offline: 1}
+  - {dir: 09-files, title: "文件读写与异常处理", short: "文件与异常", theory: 4, lab: 2, offline: 1}
+  - {dir: 10-modules-oop, title: "模块、第三方库与面向对象入门", short: "模块与类", theory: 4, lab: 2, offline: 1}
+  - {dir: 11-data-libs, title: "数据处理初体验：NumPy、pandas 与 Matplotlib", short: "数据处理初体验", theory: 4, lab: 2, offline: 1}
+  - {dir: 12-ai-project, title: "Python 与人工智能：综合项目", short: "AI 综合项目", theory: 4, lab: 2, offline: 2}
 
 # 其他页面：追加在导航“常见问题”之后，如 extra_pages: [{file: mock-exam.md, title: 在线模拟卷}]
-extra_pages: []
+extra_pages: [{file: mock-exam.md, title: 期末模拟卷}]
 
 # 附录：docs/appendix/ 下的文件，按顺序自动编号为 A、B、C……（术语表固定为 glossary.md）
 appendices:
-  - {file: a-python.md, title: Python 速查}
-  - {file: b-libraries.md, title: 工具库速查}
-  - {file: c-environment.md, title: 实验环境与数据说明}
+  - {file: a-environment.md, title: 编程环境安装与常见问题}
+  - {file: b-reference.md, title: 常用内置函数与方法速查}
+  - {file: c-errors.md, title: 常见报错速查表}
   - {file: glossary.md, title: 术语表}
 
 # 教案默认设置（每章可在 lesson-plans/chNN.yml 里覆盖）
 lesson_plan:
-  online_ratio: 0.5                   # 线上学时占比（开放大学以线上为主，按实际改）
+  online_ratio: 0.7                   # 线上学时占比（开放大学以线上为主，按实际改）
   teacher: ""                         # 授课教师，留空则教案上留出填写位置
   school: ""                          # 学校名称，留空则不显示

@@ -2,10 +2,12 @@
 
 按章存放，`chNN/` 对应第 NN 章，文件名为 `labN_M_英文短名.py`（第 N 章实验 N-M），公共数据放在 `data/`，见 `data/README.md`。
 
-安装实验环境（Python 3.11）：
+第 1～10 章只用 Python 自带的功能，装好 Python 3.12 和 Thonny 就能运行；第 10 章起要用到第三方库，安装方法：
 
 ```bash
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-每个脚本都要能在 `labs/` 目录下直接运行（`python ch01/lab1_1_example.py`），运行结果和教材正文中的“运行结果”一致。需要 GPU、联网下载模型或调用大模型 API 的脚本，文件开头的注释写明运行条件和预计时间。
+**运行方法**：在 Thonny 里打开 `chNN/` 下的 `.py` 文件，点绿色的“运行”按钮。读取数据的程序用 `../data/文件名` 找数据，所以要保持 `labs/` 文件夹的结构不变。
+
+需要输入的程序（用到 `input()`），教材里的“运行结果”中 `>>>` 后面不是程序打印的，而是编者当时输入的内容（见各实验说明）。

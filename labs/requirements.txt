@@ -1,8 +1,13 @@
-# 《课程名称》实验环境（写明教材编写时实测通过的版本，Python 3.11）
+# 《Python 编程》实验环境（教材编写时实测通过的版本，Python 3.12）
 # 安装：pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 只列学生实验真正用到的库，版本号必须是编者实际运行过的；需要 GPU 的库单独写在下面并注明
-pandas
-numpy
-matplotlib
-scikit-learn
-jupyter
+# 第 1～9 章不需要安装任何库；下面的库从第 10 章开始用到
+openpyxl==3.1.5
+jieba==0.42.1
+numpy==2.5.4
+pandas==3.1.0
+matplotlib==3.11.2
+scikit-learn==1.9.1
+openai==3.42.0
+requests==2.34.2
+pyinstaller==6.22.3
+jupyterlab==4.6.5
