@@ -7,7 +7,7 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 本表按章节顺序列出本书的主要术语，每个术语给出英文名称、简明定义和例子。正文中带虚线下划线的术语，把鼠标停在上面就能看到定义，点击可以跳到本表。
 
-通用术语（如“过拟合”“精确率”）的译名和定义以本系列教材共用的《系列公共术语表》为准，各书保持一致。
+与后续课程共用的术语（如“机器学习”“大语言模型”“DataFrame”）的译名和定义，与本系列其他教材保持一致。
 
 ## 第 1 章 初识 Python：搭好环境，写出第一个程序
 
@@ -18,7 +18,7 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 | <span id="g-编程语言"></span>编程语言 | Programming Language | 人和计算机都能理解、用来编写程序的语言 | Python、C、Java、JavaScript |
 | <span id="g-解释器"></span>解释器 | Interpreter | 把 Python 代码逐行翻译并执行的程序，遇到错误就停止 | 安装 Python 主要就是安装解释器 |
 | <span id="g-集成开发环境"></span>集成开发环境 | Integrated Development Environment, IDE | 把编辑、运行、调试等功能集成在一起的编程软件 | Thonny、VS Code、IDLE |
-| <span id="g-函数"></span>函数 | Function | 有名字、能完成一项功能的代码，用“名字(内容)”的形式调用 | `print("你好")`、`input("姓名：")` |
+| <span id="g-函数"></span>函数 | Function | 有名字、能完成一项功能的代码，用“名字(内容)”的形式调用；也可以用 def 自己定义（第 8 章） | `print("你好")`、`input("姓名：")` |
 | <span id="g-字符串"></span>字符串 | String | 用引号括起来的一段文字，也就是文本数据 | `"街坊便利店"`、`'13800001234'` |
 | <span id="g-注释"></span>注释 | Comment | 以 # 开头、写给人看的说明，运行时被忽略 | `# 计算找零` |
 | <span id="g-交互模式"></span>交互模式 | Interactive Mode | 在 >>> 提示符后输入一行代码、立即得到结果的使用方式 | 在 Shell 中输入 `3.5 * 2` 得到 7.0 |
@@ -119,7 +119,6 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
-| <span id="g-函数"></span>函数 | Function | 把一段代码打包起来、起个名字，可以反复调用的程序单元 | `def discount(total):` |
 | <span id="g-参数"></span>参数 | Parameter | 定义函数时括号里的变量，用来接收调用时传进来的值 | `def greet(name)` 中的 `name` |
 | <span id="g-函数体"></span>函数体 | Function Body | def 下面缩进的、调用时才执行的代码 | discount 里计算优惠的几行 |
 | <span id="g-位置参数"></span>位置参数 | Positional Argument | 调用时按位置顺序一一对应传给参数的值 | `add(3, 5)`：3 给 a，5 给 b |

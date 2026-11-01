@@ -148,7 +148,8 @@ def lab_titles(ch, c):
     p = chapter_path(ch)
     if not p.exists():
         return []
-    return re.findall(rf"^### ({c['lab_word']} \d+-\d+ .+)$", p.read_text(encoding="utf-8"), re.M)
+    found = re.findall(rf"^### ({c['lab_word']} \d+-\d+ .+)$", p.read_text(encoding="utf-8"), re.M)
+    return [re.sub(r"\s*\{ #[^}]*\}\s*$", "", t) for t in found]      # 去掉标题末尾的 { #lab4-1 } 锚点
 
 
 def sync_index(c):
