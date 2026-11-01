@@ -33,6 +33,16 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-变量"></span>变量 | Variable | 贴在数据上的名字标签，通过名字可以找到和修改数据 | `price = 3.5` 中的 `price` |
+| <span id="g-赋值语句"></span>赋值语句 | Assignment Statement | 用 = 把右边算出的值存起来、贴上左边名字的语句，先算右边再赋值 | `total = price * qty` |
+| <span id="g-保留字"></span>保留字 | Keyword | Python 自己使用的专用词，不能用作变量名，3.14 共 35 个 | `if`、`for`、`True`、`class` |
+| <span id="g-数据类型"></span>数据类型 | Data Type | 数据的种类，决定了数据能做哪些运算 | 整数、浮点数、字符串、布尔值 |
+| <span id="g-整数"></span>整数 | Integer, int | 没有小数部分的数 | `2`、`-5`、`2025` |
+| <span id="g-浮点数"></span>浮点数 | Floating-point Number, float | 带小数点的数，内部保存的是近似值 | `3.5`、`7.0`、`1e3` |
+| <span id="g-布尔值"></span>布尔值 | Boolean, bool | 表示真假的值，只有 True 和 False 两个 | `3 > 2` 的结果是 `True` |
+| <span id="g-复合赋值运算符"></span>复合赋值运算符 | Augmented Assignment Operator | 把运算和赋值合在一起的简写，如 +=、-=、*= | `count += 1` 等于 `count = count + 1` |
+| <span id="g-类型转换"></span>类型转换 | Type Conversion | 把数据从一种类型变成另一种类型 | `int("12")` 得到 12，`str(100)` 得到 "100" |
+| <span id="g-f-string"></span>f-string | Formatted String Literal | 以 f 开头、用花括号插入变量和格式说明的字符串 | `f"{price:.2f}"` 显示 3.50 |
 
 ## 第 3 章 字符串：处理文字信息
 

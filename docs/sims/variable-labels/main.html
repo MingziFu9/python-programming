@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>变量：给数据贴标签</title>
+<link rel="stylesheet" href="../common/sim.css">
+</head>
+<body>
+<h1>变量：给数据贴标签</h1>
+<div class="sub">变量就是贴在数据上的名字标签。点“下一步”，看每次赋值时哪个标签换了值（浅黄色）；注意：price 变了，total 不会自动跟着变。</div>
+<div id="stepper"></div>
+
+<script src="../common/stepper.js"></script>
+<script>
+// 以下数据由 tools/make_stepper_sim.py 根据 spec.json 真实运行代码生成，请勿手改
+var PROGRAMS = [{"title": "改价格", "trace": {"code": ["price = 3.5", "qty = 2", "total = price * qty", "print(\"应收\", total)", "price = 4.0", "print(\"涨价后 total 还是\", total)", "total = price * qty", "print(\"重新计算\", total)"], "steps": [{"line": 1, "frames": [{"name": "全局", "vars": {}}], "out": ""}, {"line": 2, "frames": [{"name": "全局", "vars": {"price": "3.5"}}], "out": ""}, {"line": 3, "frames": [{"name": "全局", "vars": {"price": "3.5", "qty": "2"}}], "out": ""}, {"line": 4, "frames": [{"name": "全局", "vars": {"price": "3.5", "qty": "2", "total": "7.0"}}], "out": ""}, {"line": 5, "frames": [{"name": "全局", "vars": {"price": "3.5", "qty": "2", "total": "7.0"}}], "out": "应收 7.0\n"}, {"line": 6, "frames": [{"name": "全局", "vars": {"price": "4.0", "qty": "2", "total": "7.0"}}], "out": "应收 7.0\n"}, {"line": 7, "frames": [{"name": "全局", "vars": {"price": "4.0", "qty": "2", "total": "7.0"}}], "out": "应收 7.0\n涨价后 total 还是 7.0\n"}, {"line": 8, "frames": [{"name": "全局", "vars": {"price": "4.0", "qty": "2", "total": "8.0"}}], "out": "应收 7.0\n涨价后 total 还是 7.0\n"}, {"line": null, "frames": [{"name": "全局", "vars": {"price": "4.0", "qty": "2", "total": "8.0"}}], "out": "应收 7.0\n涨价后 total 还是 7.0\n重新计算 8.0\n"}]}, "notes": {"1": "把 3.5 存起来，贴上标签 price。", "2": "把 2 存起来，贴上标签 qty。", "3": "先算右边：price * qty 就是 3.5 × 2 = 7.0，再把结果贴上标签 total。", "4": "显示 total 现在的值。", "5": "price 的标签改贴到 4.0 上。total 会变吗？", "6": "total 还是 7.0！它保存的是当时算出来的结果，不会自动重算。", "7": "要用新价格，必须重新算一遍，再赋值给 total。", "8": "现在 total 是 4.0 × 2 = 8.0。"}}, {"title": "计数与交换", "trace": {"code": ["count = 0", "count = count + 1", "count += 1", "count += 1", "print(\"今天来了\", count, \"位顾客\")", "a = \"早班\"", "b = \"晚班\"", "a, b = b, a", "print(a, b)"], "steps": [{"line": 1, "frames": [{"name": "全局", "vars": {}}], "out": ""}, {"line": 2, "frames": [{"name": "全局", "vars": {"count": "0"}}], "out": ""}, {"line": 3, "frames": [{"name": "全局", "vars": {"count": "1"}}], "out": ""}, {"line": 4, "frames": [{"name": "全局", "vars": {"count": "2"}}], "out": ""}, {"line": 5, "frames": [{"name": "全局", "vars": {"count": "3"}}], "out": ""}, {"line": 6, "frames": [{"name": "全局", "vars": {"count": "3"}}], "out": "今天来了 3 位顾客\n"}, {"line": 7, "frames": [{"name": "全局", "vars": {"count": "3", "a": "'早班'"}}], "out": "今天来了 3 位顾客\n"}, {"line": 8, "frames": [{"name": "全局", "vars": {"count": "3", "a": "'早班'", "b": "'晚班'"}}], "out": "今天来了 3 位顾客\n"}, {"line": 9, "frames": [{"name": "全局", "vars": {"count": "3", "a": "'晚班'", "b": "'早班'"}}], "out": "今天来了 3 位顾客\n"}, {"line": null, "frames": [{"name": "全局", "vars": {"count": "3", "a": "'晚班'", "b": "'早班'"}}], "out": "今天来了 3 位顾客\n晚班 早班\n"}]}, "notes": {"1": "计数器从 0 开始。", "2": "先算右边 count + 1 = 1，再存回 count。等号是“赋值”，不是“相等”。", "3": "count += 1 是 count = count + 1 的简写。", "4": "再加 1。", "5": "显示结果。", "6": "a 贴在“早班”上。", "7": "b 贴在“晚班”上。", "8": "Python 可以一步交换两个变量：右边先取出 b、a 的值，再分别贴给 a、b。", "9": "交换完成。"}}];
+Stepper(document.getElementById("stepper"), PROGRAMS);
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>
