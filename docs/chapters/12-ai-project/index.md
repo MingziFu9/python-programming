@@ -205,7 +205,7 @@ for text, p, pr in zip(new, pred, prob):
 
 国内外大多数大模型服务（如 DeepSeek、阿里云百炼上的通义千问）都提供了相同格式的接口，常称为“OpenAI 兼容格式”<sup class="cite">[[3]](#ref12-3)</sup><sup class="cite">[[4]](#ref12-4)</sup>：用 POST 方式把一段 JSON 发到 `接口地址/chat/completions`，服务器回复一段 JSON。下面用 requests 库（`pip install requests`）来发请求。
 
-为了让每位同学都能在没有账号、不花钱、不联网的情况下练习，配套资源提供了一个**模拟服务器** `labs/ch12/mock_llm_server.py`。它在你自己的电脑上运行，请求和回复的格式与真实接口相同，只是回答按固定模板生成，不会真正思考。先在一个命令行窗口运行它（不要关闭）：
+为了让每位同学都能在没有账号、不花钱、不联网的情况下练习，配套资源提供了一个**模拟服务器** `labs/ch12/mock_llm_server.py`。它在你自己的电脑上运行，请求和回复的格式与真实接口相同，只是回答按固定模板生成，不会真正思考。先用 Thonny 的“工具 → 打开系统 shell”打开命令行窗口，进入 `labs/ch12` 文件夹运行它（不要关闭这个窗口）：
 
 ```text
 python mock_llm_server.py
@@ -497,7 +497,7 @@ Prefix dict has been built successfully.
 
 **实验步骤与代码**
 
-1. 打开一个命令行窗口，用 `cd` 进入 `labs/ch12` 文件夹，运行 `python mock_llm_server.py`，看到“模拟服务器已启动”后**不要关闭**这个窗口；
+1. 用 Thonny 菜单“工具 → 打开系统 shell”打开一个命令行窗口，用 `cd` 进入 `labs/ch12` 文件夹，运行 `python mock_llm_server.py`，看到“模拟服务器已启动”后**不要关闭**这个窗口；
 2. 在 Thonny 中打开 `labs/ch12/lab12_2_report.py` 运行：
 
 ```python

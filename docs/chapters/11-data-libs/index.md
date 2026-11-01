@@ -133,10 +133,10 @@ NumPy 快了约 24 倍
 
 做数据处理时，常常要“读一下数据，看一眼；筛一下，再看一眼”。每次都从头运行整个程序很浪费时间。[**Jupyter**](../../appendix/glossary.md#g-Jupyter "在浏览器中分单元格编写和运行代码、结果显示在单元格下方的编程环境，文件扩展名 .ipynb"){ .term } 把程序分成一个个[**单元格**](../../appendix/glossary.md#g-单元格 "Jupyter 笔记本中可以单独运行的一段代码或文字"){ .term }，每个单元格可以单独运行，结果就显示在它的下方，像一本可以运行的笔记本。
 
-在命令行（Windows 中按 Win+R，输入 cmd 回车）执行下面一行，一次装好本章需要的全部库：
+用 Thonny 菜单“工具 → 打开系统 shell”打开命令行窗口（见 [10.3.1](../10-modules-oop/index.md#1031)），执行下面一行，一次装好本章需要的全部库：
 
 ```text
-pip install jupyterlab numpy pandas matplotlib openpyxl -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install jupyterlab numpy pandas matplotlib openpyxl -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 ```
 
 装好后，先用 `cd` 进入配套资源的 labs 文件夹，再启动 JupyterLab：
@@ -146,7 +146,7 @@ cd D:\python-programming\labs
 jupyter lab
 ```
 
-浏览器会自动打开 JupyterLab 页面（地址形如 `http://localhost:8888/lab`，这是在你自己电脑上运行的，不需要联网）。关闭时，回到命令行窗口按 Ctrl+C。
+如果提示找不到 jupyter 命令，改用 `python -m jupyterlab`。浏览器会自动打开 JupyterLab 页面（地址形如 `http://localhost:8888/lab`，这是在你自己电脑上运行的，不需要联网）。关闭时，回到命令行窗口按 Ctrl+C。
 
 !!! tip "不想用 Jupyter 也可以"
     本章所有实验都是普通的 .py 文件，用 Thonny 打开直接运行也完全可以。如果在 Thonny 中安装，用“工具 → 管理包”分别搜索 numpy、pandas、matplotlib 安装即可。

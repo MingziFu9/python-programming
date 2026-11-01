@@ -226,11 +226,14 @@ pip 会自动下载这个库依赖的其他库（这里是 et-xmlfile），最�
 
 在 Thonny 中更简单：菜单“工具 → 管理包”，搜索库名，点“安装”即可，Thonny 会自动装到它自带的 Python 里。
 
+!!! note "命令行窗口从哪里打开"
+    本书用的是 Thonny 自带的 Python，直接按 Win+R 打开的 cmd 窗口往往找不到它，会提示“'pip' 不是内部或外部命令”。请用 Thonny 菜单“**工具 → 打开系统 shell**”打开命令行窗口，在这个窗口里，`python`、`pip` 指的就是 Thonny 自带的 Python。本书后面所有在命令行中执行的命令（pip、pyinstaller、jupyter 等）都在这个窗口中运行。如果命令找不到，可以在前面加 `python -m`，如 `python -m pip install openpyxl`、`python -m PyInstaller -F hello.py`。详见附录 A。
+
 !!! tip "用国内镜像加速下载"
     PyPI 服务器在国外，下载可能很慢甚至失败。可以改用国内的镜像网站，在命令后面加 `-i` 和镜像地址：
 
     ```text
-    pip install openpyxl -i https://pypi.tuna.tsinghua.edu.cn/simple
+    pip install openpyxl -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
     ```
 
     这是清华大学的镜像，阿里云、中国科学技术大学等也提供镜像。设置方法详见附录 A。
@@ -1112,7 +1115,7 @@ mindmap
 ??? tip "答案与解析"
     **答案：√**
 
-    如清华大学镜像 `https://pypi.tuna.tsinghua.edu.cn/simple`。
+    如清华大学镜像 `https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple`。
 
     考查：国内镜像 · 认知层次：记忆 · [回看 10.3.1](#1031)
     { .quiz-meta }
