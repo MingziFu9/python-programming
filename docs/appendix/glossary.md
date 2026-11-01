@@ -13,8 +13,21 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
-| <span id="g-示例术语"></span>示例术语 | Example Term | 这里是术语表中的定义，鼠标悬停时显示 | 写一个学生熟悉的例子 |
-| <span id="g-另一个术语"></span>另一个术语 | Another Term | 以示例术语为基础的概念 | …… |
+| <span id="g-程序"></span>程序 | Program | 让计算机按顺序完成任务的一条条指令 | 收银系统、微信都是程序 |
+| <span id="g-编程"></span>编程 | Programming | 用编程语言编写程序的过程 | 小周为便利店写收银小程序 |
+| <span id="g-编程语言"></span>编程语言 | Programming Language | 人和计算机都能理解、用来编写程序的语言 | Python、C、Java、JavaScript |
+| <span id="g-解释器"></span>解释器 | Interpreter | 把 Python 代码逐行翻译并执行的程序，遇到错误就停止 | 安装 Python 主要就是安装解释器 |
+| <span id="g-集成开发环境"></span>集成开发环境 | Integrated Development Environment, IDE | 把编辑、运行、调试等功能集成在一起的编程软件 | Thonny、VS Code、IDLE |
+| <span id="g-函数"></span>函数 | Function | 有名字、能完成一项功能的代码，用“名字(内容)”的形式调用 | `print("你好")`、`input("姓名：")` |
+| <span id="g-字符串"></span>字符串 | String | 用引号括起来的一段文字，也就是文本数据 | `"街坊便利店"`、`'13800001234'` |
+| <span id="g-注释"></span>注释 | Comment | 以 # 开头、写给人看的说明，运行时被忽略 | `# 计算找零` |
+| <span id="g-交互模式"></span>交互模式 | Interactive Mode | 在 >>> 提示符后输入一行代码、立即得到结果的使用方式 | 在 Shell 中输入 `3.5 * 2` 得到 7.0 |
+| <span id="g-脚本"></span>脚本 | Script | 保存在 .py 文件里、可以反复运行的程序 | `lab1_2_poster.py` |
+| <span id="g-缩进"></span>缩进 | Indentation | 代码行开头的空格，在 Python 中表示代码的层次，不能随意添加 | `if` 下面的语句缩进 4 个空格 |
+| <span id="g-PEP-8"></span>PEP 8 | PEP 8 | Python 官方的代码风格建议 | 逗号后加空格：`print("合计", 100)` |
+| <span id="g-追踪信息"></span>追踪信息 | Traceback | 程序出错时 Python 给出的报告，包括出错位置和错误类型 | `NameError: name 'shop_nmae' is not defined` |
+| <span id="g-语法错误"></span>语法错误 | Syntax Error | 代码不符合 Python 语法规则的错误，运行前就会被发现 | 少了右括号、用了中文引号 |
+| <span id="g-AI-编程助手"></span>AI 编程助手 | AI Coding Assistant | 基于大模型、能解释代码、排查报错、生成代码的工具 | 通义灵码、文心快码 |
 
 ## 第 2 章 变量、数据类型与运算
 

@@ -2,7 +2,7 @@
 
 按章存放，`chNN/` 对应第 NN 章，文件名为 `labN_M_英文短名.py`（第 N 章实验 N-M），公共数据放在 `data/`，见 `data/README.md`。
 
-第 1～10 章只用 Python 自带的功能，装好 Python 3.12 和 Thonny 就能运行；第 10 章起要用到第三方库，安装方法：
+第 1～10 章只用 Python 自带的功能，装好 Thonny（自带 Python 3.14）就能运行；第 10 章起要用到第三方库，安装方法：
 
 ```bash
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple

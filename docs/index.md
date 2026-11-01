@@ -29,10 +29,21 @@
 
 | 章 | 正文字数 | 实验 | 课后练习<br>（可在线作答） | 术语 | 参考文献 | 交互动画 |
 |---|---|---|---|---|---|---|
-| [第 1 章](chapters/01-sample/index.md) | 0.1 万 | 1 | 5（3） | 2 | 1 | 1 |
-| **合计** | **0.1 万** | **1** | **5（3）** | **2** | **1** | **1** |
+| [第 1 章](chapters/01-getting-started/index.md) | 0.7 万 | 3 | 21（16） | 15 | 6 | 1 |
+| [第 2 章](chapters/02-variables/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 3 章](chapters/03-strings/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 4 章](chapters/04-conditions/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 5 章](chapters/05-loops/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 6 章](chapters/06-lists/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 7 章](chapters/07-dicts/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 8 章](chapters/08-functions/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 9 章](chapters/09-files/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 10 章](chapters/10-modules-oop/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 11 章](chapters/11-data-libs/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| [第 12 章](chapters/12-ai-project/index.md) | 0.1 万 | 3 | 5（3） | 0 | 1 | 0 |
+| **合计** | **1.5 万** | **36** | **76（49）** | **15** | **17** | **1** |
 
-正文字数只统计汉字，不含代码和课后练习；单选、多选和判断题可以在网页上直接作答。配套学习资源：[交互动画](sims/index.md) 1 个 · [学习图谱](learning-graph/index.md) 2 个概念 · [常见问题](faq/index.md) 2 问 · [术语表](appendix/glossary.md) 2 条。
+正文字数只统计汉字，不含代码和课后练习；单选、多选和判断题可以在网页上直接作答。配套学习资源：[交互动画](sims/index.md) 1 个 · [学习图谱](learning-graph/index.md) 2 个概念 · [常见问题](faq/index.md) 2 问 · [术语表](appendix/glossary.md) 15 条。
 
 <!-- stats:end -->
 
@@ -41,7 +52,7 @@
 <!-- toc:start -->
 | 章节 | 实验 |
 |---|---|
-| [第 1 章 初识 Python：搭好环境，写出第一个程序](chapters/01-getting-started/index.md) | 实验 1-1 ★ 实验名称<br>实验 1-2 ★ 实验名称<br>实验 1-3 ★ 实验名称 |
+| [第 1 章 初识 Python：搭好环境，写出第一个程序](chapters/01-getting-started/index.md) | 实验 1-1 ★ 安装环境并运行第一个程序<br>实验 1-2 ★ 打印小店开业海报和个人名片<br>实验 1-3 ☆ 读懂报错信息 |
 | [第 2 章 变量、数据类型与运算](chapters/02-variables/index.md) | 实验 2-1 ★ 实验名称<br>实验 2-2 ★ 实验名称<br>实验 2-3 ★ 实验名称 |
 | [第 3 章 字符串：处理文字信息](chapters/03-strings/index.md) | 实验 3-1 ★ 实验名称<br>实验 3-2 ★ 实验名称<br>实验 3-3 ★ 实验名称 |
 | [第 4 章 条件判断：让程序做选择](chapters/04-conditions/index.md) | 实验 4-1 ★ 实验名称<br>实验 4-2 ★ 实验名称<br>实验 4-3 ★ 实验名称 |

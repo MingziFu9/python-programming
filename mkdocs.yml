@@ -52,7 +52,7 @@ nav:
   - "第 12 章 Python 与人工智能：综合项目": chapters/12-ai-project/index.md
   - 交互动画:
     - sims/index.md
-    - "示例动画：点击计数器": sims/example-counter/index.md
+    - "程序是怎么运行的": sims/run-program/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
   - "期末模拟卷": mock-exam.md

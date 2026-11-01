@@ -1,4 +1,4 @@
-# 《Python 编程》实验环境（教材编写时实测通过的版本，Python 3.12）
+# 《Python 编程》实验环境（教材编写时实测通过的版本，Python 3.14，即 Thonny 5.0.1 自带的版本）
 # 安装：pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 # 第 1～9 章不需要安装任何库；下面的库从第 10 章开始用到
 openpyxl==3.1.5

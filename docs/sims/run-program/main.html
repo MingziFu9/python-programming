@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>程序是怎么运行的</title>
+<link rel="stylesheet" href="../common/sim.css">
+</head>
+<body>
+<h1>程序是怎么运行的</h1>
+<div class="sub">解释器从第一行开始，一行一行往下执行。点“下一步”看它每执行一行，变量和输出发生了什么变化；切换到“出错的程序”，看程序在哪一行停下来。</div>
+<div id="stepper"></div>
+
+<script src="../common/stepper.js"></script>
+<script>
+// 以下数据由 tools/make_stepper_sim.py 根据 spec.json 真实运行代码生成，请勿手改
+var PROGRAMS = [{"title": "正常的程序", "trace": {"code": ["shop = \"街坊便利店\"", "print(\"欢迎光临\", shop)", "name = input(\"请问怎么称呼？\")", "print(name + \"，你好！\")", "print(\"1 + 2 =\", 1 + 2)"], "steps": [{"line": 1, "frames": [{"name": "全局", "vars": {}}], "out": ""}, {"line": 2, "frames": [{"name": "全局", "vars": {"shop": "'街坊便利店'"}}], "out": ""}, {"line": 3, "frames": [{"name": "全局", "vars": {"shop": "'街坊便利店'"}}], "out": "欢迎光临 街坊便利店\n"}, {"line": 4, "frames": [{"name": "全局", "vars": {"shop": "'街坊便利店'", "name": "'小周'"}}], "out": "欢迎光临 街坊便利店\n请问怎么称呼？小周\n"}, {"line": 5, "frames": [{"name": "全局", "vars": {"shop": "'街坊便利店'", "name": "'小周'"}}], "out": "欢迎光临 街坊便利店\n请问怎么称呼？小周\n小周，你好！\n"}, {"line": null, "frames": [{"name": "全局", "vars": {"shop": "'街坊便利店'", "name": "'小周'"}}], "out": "欢迎光临 街坊便利店\n请问怎么称呼？小周\n小周，你好！\n1 + 2 = 3\n"}]}, "notes": {"1": "把文字“街坊便利店”存起来，贴上名字 shop。", "2": "print 把括号里的内容显示在输出区，多个内容之间自动加一个空格。", "3": "input 先显示提示文字，然后等你在键盘上输入。这里假设输入了“小周”，输入的内容存进 name。", "4": "用 + 把两段文字拼起来再显示。", "5": "引号里的 1 + 2 = 原样显示，后面的 1 + 2 先算出 3 再显示。"}}, {"title": "出错的程序", "trace": {"code": ["print(\"开始算账\")", "total = 12 + 30", "print(\"合计\", total)", "print(\"平均\", total / 0)", "print(\"这一行不会执行\")"], "steps": [{"line": 1, "frames": [{"name": "全局", "vars": {}}], "out": ""}, {"line": 2, "frames": [{"name": "全局", "vars": {}}], "out": "开始算账\n"}, {"line": 3, "frames": [{"name": "全局", "vars": {"total": "42"}}], "out": "开始算账\n"}, {"line": 4, "frames": [{"name": "全局", "vars": {"total": "42"}}], "out": "开始算账\n合计 42\n"}, {"line": null, "frames": [{"name": "全局", "vars": {"total": "42"}}], "out": "开始算账\n合计 42\n", "error": "ZeroDivisionError: division by zero"}]}, "notes": {"1": "显示一行文字。", "2": "先算出 12 + 30 = 42，再存进 total。", "3": "显示合计。", "4": "要算 42 ÷ 0。除数不能为 0，Python 会在这里报错并停止。", "5": "前一行出错了，这一行永远不会执行。"}}];
+Stepper(document.getElementById("stepper"), PROGRAMS);
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>
