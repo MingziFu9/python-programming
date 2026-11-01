@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pandas 筛选与分组</title>
+<link rel="stylesheet" href="../common/sim.css">
+<style>
+.ctl { display:grid; grid-template-columns: 4.5em 1fr; gap:6px 8px; align-items:center; font-size:13px; }
+.ctl select { font-size:13px; padding:3px 6px; }
+.codeline { font-family:"JetBrains Mono",Consolas,monospace; font-size:13px; background:#f5f7ff; border:1px dashed var(--accent); border-radius:6px; padding:6px 8px; margin-top:8px; word-break:break-all; font-variant-ligatures:none; }
+.codeline .seg { border-radius:3px; padding:0 1px; transition:background .2s; }
+.codeline .seg.on { background:#fff59d; }
+table.t td.l { text-align:left; }
+table.t tr { transition:opacity .25s, background .25s; }
+table.t tr.off { opacity:.25; }
+table.t tr.off td { text-decoration:line-through; }
+.steps { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+.steps button.done { background:#e8eaf6; }
+.groups { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; min-height:2em; }
+.grp { border:2px solid var(--line); border-radius:8px; padding:4px 8px; font-size:13px; }
+.grp b { display:block; }
+.out { font-family:"JetBrains Mono",Consolas,monospace; font-size:12.5px; background:#263238; color:#e0f2f1; padding:6px 8px; border-radius:6px; min-height:4.5em; white-space:pre; overflow:auto; margin-top:6px; font-variant-ligatures:none; }
+.wrap { display:grid; grid-template-columns: 1.15fr 1fr; gap:12px; }
+@media (max-width: 680px) { .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<h1>pandas 筛选与分组：一行代码做了哪三件事</h1>
+<div class="sub">表格是配套销售表的前 14 行（虚构数据）。选好筛选条件、分组列和汇总方式，按“下一步”看 pandas 依次做的三件事：先筛选出符合条件的行，再按分组列把行分成几堆，最后对每一堆的“金额”做汇总。</div>
+<div class="wrap">
+  <div>
+    <div class="ctl">
+      <span>① 筛选</span><select id="f">
+        <option value="none">不筛选（全部行）</option>
+        <option value="cat">品类 == "零食"</option>
+        <option value="amt" selected>金额 &gt;= 10</option>
+        <option value="pay">支付方式 == "微信"</option>
+        <option value="qty">数量 &gt;= 2</option></select>
+      <span>② 分组</span><select id="g">
+        <option value="none">不分组</option>
+        <option value="品类" selected>按品类</option>
+        <option value="支付方式">按支付方式</option></select>
+      <span>③ 汇总</span><select id="a">
+        <option value="sum" selected>sum 求和</option>
+        <option value="count">count 计数</option>
+        <option value="mean">mean 平均</option></select>
+    </div>
+    <div class="codeline" id="code"></div>
+    <div class="steps"><button id="prev">上一步</button><button id="next" class="main">下一步</button><button id="reset">重来</button></div>
+    <div class="msg" id="msg"></div>
+  </div>
+  <div>
+    <table class="t" id="tbl"></table>
+  </div>
+</div>
+<div class="box"><b>分组结果</b> <span class="note" id="gn"></span><div class="groups" id="groups"></div></div>
+<div class="box"><b>print 输出</b><div class="out" id="out"></div></div>
+<script>
+(function () {
+  var D = {"rows": [["酸奶200g", "饮料", 1, 6.0, "微信"], ["方便面", "零食", 1, 4.5, "微信"], ["包子(2个)", "早餐", 1, 4.0, "微信"], ["饼干", "零食", 1, 6.0, "微信"], ["洗洁精", "日用", 1, 9.9, "支付宝"], ["鲜牛奶250ml", "饮料", 1, 4.5, "支付宝"], ["挂面", "粮油", 1, 6.5, "支付宝"], ["纸巾(10包)", "日用", 1, 15.9, "支付宝"], ["巧克力", "零食", 1, 10.0, "支付宝"], ["饼干", "零食", 1, 6.0, "微信"], ["矿泉水550ml", "饮料", 1, 2.0, "微信"], ["纸巾(10包)", "日用", 1, 15.9, "微信"], ["电池(4节)", "日用", 4, 44.0, "微信"], ["辣条", "零食", 1, 2.5, "微信"]], "combos": {"none|none|sum": {"code": "df[\"金额\"].sum()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "137.7"}, "none|none|count": {"code": "df[\"金额\"].count()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "14"}, "none|none|mean": {"code": "df[\"金额\"].mean()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "9.835714285714285"}, "none|品类|sum": {"code": "df.groupby(\"品类\")[\"金额\"].sum()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "品类\n日用    85.7\n早餐     4.0\n粮油     6.5\n零食    29.0\n饮料    12.5\nName: 金额, dtype: float64"}, "none|品类|count": {"code": "df.groupby(\"品类\")[\"金额\"].count()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "品类\n日用    4\n早餐    1\n粮油    1\n零食    5\n饮料    3\nName: 金额, dtype: int64"}, "none|品类|mean": {"code": "df.groupby(\"品类\")[\"金额\"].mean()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "品类\n日用    21.425000\n早餐     4.000000\n粮油     6.500000\n零食     5.800000\n饮料     4.166667\nName: 金额, dtype: float64"}, "none|支付方式|sum": {"code": "df.groupby(\"支付方式\")[\"金额\"].sum()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "支付方式\n微信      90.9\n支付宝    46.8\nName: 金额, dtype: float64"}, "none|支付方式|count": {"code": "df.groupby(\"支付方式\")[\"金额\"].count()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "支付方式\n微信      9\n支付宝    5\nName: 金额, dtype: int64"}, "none|支付方式|mean": {"code": "df.groupby(\"支付方式\")[\"金额\"].mean()", "keep": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "text": "支付方式\n微信      10.10\n支付宝     9.36\nName: 金额, dtype: float64"}, "cat|none|sum": {"code": "df[df[\"品类\"] == \"零食\"][\"金额\"].sum()", "keep": [1, 3, 8, 9, 13], "text": "29.0"}, "cat|none|count": {"code": "df[df[\"品类\"] == \"零食\"][\"金额\"].count()", "keep": [1, 3, 8, 9, 13], "text": "5"}, "cat|none|mean": {"code": "df[df[\"品类\"] == \"零食\"][\"金额\"].mean()", "keep": [1, 3, 8, 9, 13], "text": "5.8"}, "cat|品类|sum": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"品类\")[\"金额\"].sum()", "keep": [1, 3, 8, 9, 13], "text": "品类\n零食    29.0\nName: 金额, dtype: float64"}, "cat|品类|count": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"品类\")[\"金额\"].count()", "keep": [1, 3, 8, 9, 13], "text": "品类\n零食    5\nName: 金额, dtype: int64"}, "cat|品类|mean": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"品类\")[\"金额\"].mean()", "keep": [1, 3, 8, 9, 13], "text": "品类\n零食    5.8\nName: 金额, dtype: float64"}, "cat|支付方式|sum": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"支付方式\")[\"金额\"].sum()", "keep": [1, 3, 8, 9, 13], "text": "支付方式\n微信      19.0\n支付宝    10.0\nName: 金额, dtype: float64"}, "cat|支付方式|count": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"支付方式\")[\"金额\"].count()", "keep": [1, 3, 8, 9, 13], "text": "支付方式\n微信      4\n支付宝    1\nName: 金额, dtype: int64"}, "cat|支付方式|mean": {"code": "df[df[\"品类\"] == \"零食\"].groupby(\"支付方式\")[\"金额\"].mean()", "keep": [1, 3, 8, 9, 13], "text": "支付方式\n微信       4.75\n支付宝    10.00\nName: 金额, dtype: float64"}, "amt|none|sum": {"code": "df[df[\"金额\"] >= 10][\"金额\"].sum()", "keep": [7, 8, 11, 12], "text": "85.8"}, "amt|none|count": {"code": "df[df[\"金额\"] >= 10][\"金额\"].count()", "keep": [7, 8, 11, 12], "text": "4"}, "amt|none|mean": {"code": "df[df[\"金额\"] >= 10][\"金额\"].mean()", "keep": [7, 8, 11, 12], "text": "21.45"}, "amt|品类|sum": {"code": "df[df[\"金额\"] >= 10].groupby(\"品类\")[\"金额\"].sum()", "keep": [7, 8, 11, 12], "text": "品类\n日用    75.8\n零食    10.0\nName: 金额, dtype: float64"}, "amt|品类|count": {"code": "df[df[\"金额\"] >= 10].groupby(\"品类\")[\"金额\"].count()", "keep": [7, 8, 11, 12], "text": "品类\n日用    3\n零食    1\nName: 金额, dtype: int64"}, "amt|品类|mean": {"code": "df[df[\"金额\"] >= 10].groupby(\"品类\")[\"金额\"].mean()", "keep": [7, 8, 11, 12], "text": "品类\n日用    25.266667\n零食    10.000000\nName: 金额, dtype: float64"}, "amt|支付方式|sum": {"code": "df[df[\"金额\"] >= 10].groupby(\"支付方式\")[\"金额\"].sum()", "keep": [7, 8, 11, 12], "text": "支付方式\n微信      59.9\n支付宝    25.9\nName: 金额, dtype: float64"}, "amt|支付方式|count": {"code": "df[df[\"金额\"] >= 10].groupby(\"支付方式\")[\"金额\"].count()", "keep": [7, 8, 11, 12], "text": "支付方式\n微信      2\n支付宝    2\nName: 金额, dtype: int64"}, "amt|支付方式|mean": {"code": "df[df[\"金额\"] >= 10].groupby(\"支付方式\")[\"金额\"].mean()", "keep": [7, 8, 11, 12], "text": "支付方式\n微信      29.95\n支付宝    12.95\nName: 金额, dtype: float64"}, "pay|none|sum": {"code": "df[df[\"支付方式\"] == \"微信\"][\"金额\"].sum()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "90.9"}, "pay|none|count": {"code": "df[df[\"支付方式\"] == \"微信\"][\"金额\"].count()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "9"}, "pay|none|mean": {"code": "df[df[\"支付方式\"] == \"微信\"][\"金额\"].mean()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "10.100000000000001"}, "pay|品类|sum": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"品类\")[\"金额\"].sum()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "品类\n日用    59.9\n早餐     4.0\n零食    19.0\n饮料     8.0\nName: 金额, dtype: float64"}, "pay|品类|count": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"品类\")[\"金额\"].count()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "品类\n日用    2\n早餐    1\n零食    4\n饮料    2\nName: 金额, dtype: int64"}, "pay|品类|mean": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"品类\")[\"金额\"].mean()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "品类\n日用    29.95\n早餐     4.00\n零食     4.75\n饮料     4.00\nName: 金额, dtype: float64"}, "pay|支付方式|sum": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"支付方式\")[\"金额\"].sum()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "支付方式\n微信    90.9\nName: 金额, dtype: float64"}, "pay|支付方式|count": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"支付方式\")[\"金额\"].count()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "支付方式\n微信    9\nName: 金额, dtype: int64"}, "pay|支付方式|mean": {"code": "df[df[\"支付方式\"] == \"微信\"].groupby(\"支付方式\")[\"金额\"].mean()", "keep": [0, 1, 2, 3, 9, 10, 11, 12, 13], "text": "支付方式\n微信    10.1\nName: 金额, dtype: float64"}, "qty|none|sum": {"code": "df[df[\"数量\"] >= 2][\"金额\"].sum()", "keep": [12], "text": "44.0"}, "qty|none|count": {"code": "df[df[\"数量\"] >= 2][\"金额\"].count()", "keep": [12], "text": "1"}, "qty|none|mean": {"code": "df[df[\"数量\"] >= 2][\"金额\"].mean()", "keep": [12], "text": "44.0"}, "qty|品类|sum": {"code": "df[df[\"数量\"] >= 2].groupby(\"品类\")[\"金额\"].sum()", "keep": [12], "text": "品类\n日用    44.0\nName: 金额, dtype: float64"}, "qty|品类|count": {"code": "df[df[\"数量\"] >= 2].groupby(\"品类\")[\"金额\"].count()", "keep": [12], "text": "品类\n日用    1\nName: 金额, dtype: int64"}, "qty|品类|mean": {"code": "df[df[\"数量\"] >= 2].groupby(\"品类\")[\"金额\"].mean()", "keep": [12], "text": "品类\n日用    44.0\nName: 金额, dtype: float64"}, "qty|支付方式|sum": {"code": "df[df[\"数量\"] >= 2].groupby(\"支付方式\")[\"金额\"].sum()", "keep": [12], "text": "支付方式\n微信    44.0\nName: 金额, dtype: float64"}, "qty|支付方式|count": {"code": "df[df[\"数量\"] >= 2].groupby(\"支付方式\")[\"金额\"].count()", "keep": [12], "text": "支付方式\n微信    1\nName: 金额, dtype: int64"}, "qty|支付方式|mean": {"code": "df[df[\"数量\"] >= 2].groupby(\"支付方式\")[\"金额\"].mean()", "keep": [12], "text": "支付方式\n微信    44.0\nName: 金额, dtype: float64"}}}
+;
+  var COLORS = { "饮料":"#e3f2fd", "零食":"#fff3e0", "早餐":"#f3e5f5", "日用":"#e8f5e9", "粮油":"#fce4ec", "微信":"#e8f5e9", "支付宝":"#e3f2fd", "现金":"#fff8e1" };
+  var BORD = { "饮料":"#1e88e5", "零食":"#fb8c00", "早餐":"#8e24aa", "日用":"#43a047", "粮油":"#d81b60", "微信":"#43a047", "支付宝":"#1e88e5", "现金":"#f9a825" };
+  var COLS = ["商品名称", "品类", "数量", "金额", "支付方式"];
+  var GI = { "品类":1, "支付方式":4 };
+  var $ = function (id) { return document.getElementById(id); };
+  var step = 0;
+  function cur() { return D.combos[$("f").value + "|" + $("g").value + "|" + $("a").value]; }
+  function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function codeHTML(c) {
+    // 把代码切成三段：筛选部分 / 分组部分 / 汇总部分，分别在第 ①②③ 步高亮
+    var s = c.code, g = $("g").value;
+    var i1 = s.indexOf(".groupby("), aggStart = s.lastIndexOf('["金额"]');
+    var grpPart = g === "none" ? "" : s.slice(i1, aggStart);
+    var filtPart = g === "none" ? s.slice(0, aggStart) : s.slice(0, i1);
+    var aggPart = s.slice(aggStart);
+    return '<span class="seg' + (step === 1 ? " on" : "") + '">' + esc(filtPart) + '</span>' +
+      '<span class="seg' + (step === 2 ? " on" : "") + '">' + esc(grpPart) + '</span>' +
+      '<span class="seg' + (step === 3 ? " on" : "") + '">' + esc(aggPart) + '</span>';
+  }
+  function render() {
+    var c = cur(), g = $("g").value, keep = {};
+    c.keep.forEach(function (i) { keep[i] = true; });
+    $("code").innerHTML = codeHTML(c);
+    var h = "<tr><th></th>" + COLS.map(function (x) { return "<th>" + x + "</th>"; }).join("") + "</tr>";
+    D.rows.forEach(function (r, i) {
+      var off = step >= 1 && !keep[i];
+      var bg = "";
+      if (step >= 2 && !off && g !== "none") bg = ' style="background:' + COLORS[r[GI[g]]] + '"';
+      h += '<tr class="' + (off ? "off" : "") + '"' + bg + "><td>" + i + "</td>" + r.map(function (v, k) {
+        var t = (k === 3 && Number.isInteger(v)) ? v.toFixed(1) : v;
+        return '<td class="' + (k === 0 ? "l" : "") + '">' + esc(t) + "</td>";
+      }).join("") + "</tr>";
+    });
+    $("tbl").innerHTML = h;
+    // 分组框
+    var groups = {}, order = [];
+    if (step >= 2) {
+      c.keep.forEach(function (i) {
+        var key = g === "none" ? "全部" : D.rows[i][GI[g]];
+        if (!groups[key]) { groups[key] = []; order.push(key); }
+        groups[key].push(D.rows[i][3]);
+      });
+      order.sort();
+    }
+    $("groups").innerHTML = order.map(function (k) {
+      var st = g === "none" ? "" : ' style="border-color:' + BORD[k] + ';background:' + COLORS[k] + '"';
+      return '<div class="grp"' + st + "><b>" + esc(k) + "（" + groups[k].length + " 行）</b>金额：" + groups[k].map(function (v) { return Number.isInteger(v) ? v.toFixed(1) : v; }).join("、") + "</div>";
+    }).join("") || '<span class="note">第 ② 步才会分组。</span>';
+    $("gn").textContent = step >= 2 ? "共 " + order.length + " 组" : "";
+    $("out").textContent = step >= 3 ? c.text : "";
+    var msgs = [
+      "先在左边选好三项，再按“下一步”。",
+      $("f").value === "none" ? "第 ① 步：不筛选，14 行全部保留。" : "第 ① 步：筛选。条件为真的行留下，其余行被划掉，留下 " + c.keep.length + " 行。方括号里的条件，会对每一行算出 True 或 False。",
+      g === "none" ? "第 ② 步：不分组，留下的所有行算作一堆。" : "第 ② 步：groupby 按“" + g + "”把留下的行分堆，同一" + g + "的行涂成同一种颜色，共 " + order.length + " 组。",
+      "第 ③ 步：对每一组的“金额”做 " + $("a").value + "，每组得到一个数。" + (g === "none" ? "不分组时结果只有一个数。" : "结果按组名排好，最下面一行写着列名和数据类型。")
+    ];
+    $("msg").textContent = msgs[step];
+    $("prev").disabled = step === 0; $("next").disabled = step === 3;
+  }
+  $("next").onclick = function () { if (step < 3) step++; render(); };
+  $("prev").onclick = function () { if (step > 0) step--; render(); };
+  $("reset").onclick = function () { step = 0; render(); };
+  ["f", "g", "a"].forEach(function (id) { $(id).onchange = function () { step = 0; render(); }; });
+  render();
+})();
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>

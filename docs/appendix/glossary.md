@@ -167,6 +167,16 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-向量化运算"></span>向量化运算 | Vectorization | 对整个数组一次性做运算，不用写循环逐个处理元素 | `prices * 0.9` 把数组中每个价格都打九折 |
+| <span id="g-数组"></span>数组 | Array, ndarray | NumPy 中存放一批同类型数字的数据结构，可以整体运算 | `np.array([2.0, 3.5, 4.5])` |
+| <span id="g-布尔索引"></span>布尔索引 | Boolean Indexing | 在方括号里放一组 True/False，只取出 True 对应的元素或行 | `prices[prices > 4]`、`df[df["金额"] >= 50]` |
+| <span id="g-Jupyter"></span>Jupyter | Jupyter | 在浏览器中分单元格编写和运行代码、结果显示在单元格下方的编程环境，文件扩展名 .ipynb | `jupyter lab` 启动 JupyterLab |
+| <span id="g-单元格"></span>单元格 | Cell | Jupyter 笔记本中可以单独运行的一段代码或文字 | 选中后按 Shift+Enter 运行 |
+| <span id="g-DataFrame"></span>DataFrame | DataFrame | pandas 中带行索引和列名的二维表格 | `df = pd.read_csv("sales_2025.csv")` |
+| <span id="g-Series"></span>Series | Series | pandas 中带索引的一列数据，DataFrame 的每一列都是一个 Series | `df["金额"]` |
+| <span id="g-分组汇总"></span>分组汇总 | Group By | 按某一列的值把行分成若干组，再对每组分别做统计 | `df.groupby("品类")["金额"].sum()` |
+| <span id="g-缺失值"></span>缺失值 | Missing Value | 表格中空着没有数据的格子，pandas 中显示为 NaN | 非会员消费的“会员号”为空 |
+| <span id="g-数据可视化"></span>数据可视化 | Data Visualization | 用程序把数据画成折线图、柱状图、饼图等图形，便于看出规律 | 用 `plt.plot` 画每月营业额折线图 |
 
 ## 第 12 章 Python 与人工智能：综合项目
 

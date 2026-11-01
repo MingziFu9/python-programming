@@ -62,7 +62,7 @@
 | [第 8 章 函数：把代码打包复用](chapters/08-functions/index.md) | 实验 8-1 ★ 把收银程序改写成函数 { #lab8-1 }<br>实验 8-2 ★ 小店工具函数库与 assert 自测 { #lab8-2 }<br>实验 8-3 ☆ 按销量、价格给商品排序 { #lab8-3 } |
 | [第 9 章 文件读写与异常处理](chapters/09-files/index.md) | 实验 9-1 ★ 把每日销售记录存入 CSV 并读回统计 { #lab9-1 }<br>实验 9-2 ★ 让收银程序不怕输错 { #lab9-2 }<br>实验 9-3 ☆ 会员通讯录存成 JSON { #lab9-3 } |
 | [第 10 章 模块、第三方库与面向对象入门](chapters/10-modules-oop/index.md) | 实验 10-1 ★ 按扩展名批量整理文件 { #lab10-1 }<br>实验 10-2 ★ 用 openpyxl 生成销售日报 Excel { #lab10-2 }<br>实验 10-3 ☆ 用类写“商品”和“购物车” { #lab10-3 } |
-| [第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib](chapters/11-data-libs/index.md) | 实验 11-1 ★ 实验名称<br>实验 11-2 ★ 实验名称<br>实验 11-3 ★ 实验名称 |
+| [第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib](chapters/11-data-libs/index.md) | 实验 11-1 ★ 读入全年销售表，回答 5 个问题 { #lab11-1 }<br>实验 11-2 ★ 画月度营业额折线图和品类销售额柱状图 { #lab11-2 }<br>实验 11-3 ☆ 用 NumPy 统计会员消费 { #lab11-3 } |
 | [第 12 章 Python 与人工智能：综合项目](chapters/12-ai-project/index.md) | 实验 12-1 ★ 实验名称<br>实验 12-2 ★ 实验名称<br>实验 12-3 ★ 实验名称 |
 
 附录：[A 编程环境安装与常见问题](appendix/a-environment.md) · [B 常用内置函数与方法速查](appendix/b-reference.md) · [C 常见报错速查表](appendix/c-errors.md) · [D 术语表](appendix/glossary.md)

@@ -62,6 +62,7 @@ nav:
     - "函数调用与返回": sims/function-call/index.md
     - "异常捕获流程": sims/try-except/index.md
     - "类与对象：一个模具压出多个商品": sims/class-object/index.md
+    - "pandas 筛选与分组": sims/pandas-group/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
   - "期末模拟卷": mock-exam.md
