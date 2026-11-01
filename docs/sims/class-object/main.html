@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>类与对象：一个模具压出多个商品</title>
+<link rel="stylesheet" href="../common/sim.css">
+<style>
+.wrap { display:grid; grid-template-columns: 1fr 1.3fr; gap:12px; }
+@media (max-width: 640px) { .wrap { grid-template-columns: 1fr; } }
+pre.cls { margin:0; font-family:"JetBrains Mono",Consolas,monospace; font-size:12.5px; line-height:1.55; background:#f5f7ff; border:1px dashed var(--accent); border-radius:8px; padding:8px; white-space:pre; overflow:auto; font-variant-ligatures:none; }
+.form { display:grid; grid-template-columns: 4.5em 1fr; gap:6px; align-items:center; font-size:13px; margin-top:8px; }
+.form input { font-size:13px; padding:3px 5px; width:100%; box-sizing:border-box; }
+.objs { display:flex; flex-wrap:wrap; gap:8px; min-height:120px; }
+.obj { border:2px solid var(--line); border-radius:10px; padding:8px 10px; min-width:150px; background:#fff; transition:all .3s; }
+.obj.hl { border-color:var(--warn); background:#fff9c4; }
+.obj .on { font-weight:bold; color:var(--accent); font-family:"JetBrains Mono",Consolas,monospace; }
+.obj table { border-collapse:collapse; margin:4px 0; font-size:13px; }
+.obj td { padding:1px 6px; border-bottom:1px solid #eee; }
+.obj td:first-child { color:var(--muted); font-family:"JetBrains Mono",Consolas,monospace; }
+.obj button { font-size:12px; padding:2px 8px; margin:2px 2px 0 0; }
+.log { font-family:"JetBrains Mono",Consolas,monospace; font-size:12.5px; background:#263238; color:#e0f2f1; padding:6px 8px; border-radius:6px; min-height:6em; max-height:11em; overflow:auto; white-space:pre-wrap; margin-top:8px; font-variant-ligatures:none; }
+.log .ret { color:#b9f6ca; } .log .cm { color:#90a4ae; }
+</style>
+</head>
+<body>
+<h1>类与对象：一个模具压出多个商品</h1>
+<div class="sub">左边的类 Goods 是“模具”，规定每个商品有哪些属性、会做哪些事。填好名称、单价、库存，点“创建对象”，就用模具压出一个商品对象。每个对象有自己的属性值；点对象上的按钮调用它的方法，只有这个对象会变化。</div>
+<div class="wrap">
+  <div>
+    <div class="box" style="margin-top:0">
+      <b>类（模具）</b>
+<pre class="cls">class Goods:
+    def __init__(self, name, price, stock):
+        self.name = name
+        self.price = price
+        self.stock = stock
+
+    def sell(self, qty):
+        if qty &gt; self.stock:
+            return False
+        self.stock -= qty
+        return True
+
+    def set_price(self, rate):
+        self.price = round(self.price * rate, 2)</pre>
+      <div class="form">
+        <span>变量名</span><input id="var" value="cola">
+        <span>name</span><input id="nm" value="可乐">
+        <span>price</span><input id="pr" type="number" step="0.1" value="3.5">
+        <span>stock</span><input id="st" type="number" value="24">
+      </div>
+      <div class="row"><button id="mk">创建对象</button>
+        <span class="lbl">试试：</span><button data-p="egg,鸡蛋,12.5,2">鸡蛋</button><button data-p="bread,面包,5.5,10">面包</button></div>
+    </div>
+  </div>
+  <div>
+    <div class="box" style="margin-top:0"><b>对象（产品）</b> <span class="note">共 <span id="n">0</span> 个</span>
+      <div class="objs" id="objs"></div>
+    </div>
+    <div class="log" id="log"></div>
+  </div>
+</div>
+<div class="msg" id="msg"></div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var objs = [];
+  function log(code, res) {
+    $("log").innerHTML += ">>> " + code + (res !== undefined ? '\n<span class="ret">' + res + "</span>" : "") + "\n";
+    $("log").scrollTop = $("log").scrollHeight;
+  }
+  function fmt(x) { return Number.isInteger(x) ? x.toFixed(1) : String(x); }
+  function render(hl) {
+    $("n").textContent = objs.length;
+    $("objs").innerHTML = objs.map(function (o, k) {
+      return '<div class="obj' + (k === hl ? " hl" : "") + '"><div class="on">' + o.v + '</div><table>' +
+        '<tr><td>.name</td><td>\'' + o.name + '\'</td></tr><tr><td>.price</td><td>' + fmt(o.price) + '</td></tr><tr><td>.stock</td><td>' + o.stock + '</td></tr></table>' +
+        '<button data-k="' + k + '" data-m="sell">.sell(1)</button><button data-k="' + k + '" data-m="price">.set_price(0.9)</button></div>';
+    }).join("") || '<span class="note">还没有对象。点左边“创建对象”。</span>';
+    document.querySelectorAll("[data-m]").forEach(function (b) {
+      b.onclick = function () { call(+b.dataset.k, b.dataset.m); };
+    });
+  }
+  function call(k, m) {
+    var o = objs[k];
+    if (m === "sell") {
+      var ok = o.stock >= 1; if (ok) o.stock -= 1;
+      log(o.v + ".sell(1)", ok ? "True" : "False");
+      $("msg").textContent = ok ? "只有 " + o.v + " 的 stock 减了 1，其他对象不受影响。" : o.v + " 库存不足，sell 返回 False。";
+    } else {
+      o.price = Math.round(o.price * 0.9 * 100) / 100;
+      log(o.v + ".set_price(0.9)");
+      $("msg").textContent = "self 就是 " + o.v + " 自己，所以改的是 " + o.v + ".price。";
+    }
+    render(k);
+  }
+  function make(v, name, price, stock) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(v)) { $("msg").textContent = "变量名只能用字母、数字、下划线，不能以数字开头。"; return; }
+    price = parseFloat(price); stock = parseInt(stock, 10);
+    if (isNaN(price) || isNaN(stock)) { $("msg").textContent = "price 和 stock 要填数字。"; return; }
+    var exist = objs.findIndex(function (o) { return o.v === v; });
+    var o = { v: v, name: name, price: price, stock: stock };
+    if (exist >= 0) objs[exist] = o; else objs.push(o);
+    log(v + " = Goods(\"" + name + "\", " + price + ", " + stock + ")");
+    $("msg").textContent = "调用 Goods(...) 时自动执行 __init__，self 指向新对象，三个参数分别存进它的属性。" + (exist >= 0 ? "（变量名 " + v + " 重新贴到了新对象上。）" : "");
+    render(exist >= 0 ? exist : objs.length - 1);
+  }
+  $("mk").onclick = function () { make($("var").value.trim(), $("nm").value.trim(), $("pr").value, $("st").value); };
+  document.querySelectorAll("[data-p]").forEach(function (b) {
+    b.onclick = function () { var p = b.dataset.p.split(","); $("var").value = p[0]; $("nm").value = p[1]; $("pr").value = p[2]; $("st").value = p[3]; make(p[0], p[1], p[2], p[3]); };
+  });
+  $("log").innerHTML = '<span class="cm"># 下面是你每一步操作对应的 Python 代码</span>\n';
+  render(-1);
+})();
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>

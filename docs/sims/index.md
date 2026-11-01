@@ -19,4 +19,5 @@ description: 本书配套的交互动画，可以在浏览器里直接操作，�
 | 第 7 章 | [词频统计：一词一词计出来](word-count/index.md) | 单步执行词频统计程序，观察字典如何随着每个词增加或累加，对比 d[键] 和 d.get(键, 默认值) 的区别 |
 | 第 8 章 | [函数调用与返回](function-call/index.md) | 单步执行函数调用，观察参数如何传入、局部变量如何出现和消失、return 如何带回结果，以及递归调用时一层层叠起来的调用 |
 | 第 9 章 | [异常捕获流程](try-except/index.md) | 用三组不同的输入单步执行 try-except-else-finally 程序，观察出错时跳过哪些行、哪个 except 接住了异常、else 和 finally 何时执行 |
+| 第 10 章 | [类与对象：一个模具压出多个商品](class-object/index.md) | 用类 Goods 创建多个商品对象，观察每个对象各自拥有的属性，点击调用方法，理解类与对象、__init__ 和 self |
 <!-- sims:end -->

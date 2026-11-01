@@ -151,6 +151,17 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-模块"></span>模块 | Module | 一个 .py 文件就是一个模块，里面的函数等可以被其他程序导入使用 | `import math` |
+| <span id="g-标准库"></span>标准库 | Standard Library | Python 安装时自带、不用另外安装的模块集合 | math、random、csv、json、datetime |
+| <span id="g-第三方库"></span>第三方库 | Third-party Library | 由其他开发者编写、发布在 PyPI 上、需要用 pip 安装的库 | openpyxl、jieba、pandas |
+| <span id="g-pip"></span>pip | pip | Python 的第三方库安装工具 | `pip install openpyxl` |
+| <span id="g-虚拟环境"></span>虚拟环境 | Virtual Environment | 为一个项目单独准备的 Python 环境，各项目的库互不干扰 | `python -m venv 环境名` |
+| <span id="g-PyInstaller"></span>PyInstaller | PyInstaller | 把 Python 程序和解释器一起打包成可执行文件的第三方库 | `pyinstaller -F hello.py` |
+| <span id="g-类"></span>类 | Class | 描述一类事物有哪些属性和方法的“模具” | `class Goods:` |
+| <span id="g-对象"></span>对象 | Object | 用类创建出来的具体事物，每个对象有自己的属性值 | `cola = Goods("可乐", 3.5)` |
+| <span id="g-属性"></span>属性 | Attribute | 对象所带的数据，用“对象.属性”访问 | `cola.price` |
+| <span id="g-初始化方法"></span>初始化方法 | Initializer | 名为 `__init__` 的特殊方法，创建对象时自动调用，用来设置属性 | `def __init__(self, name, price):` |
+| <span id="g-继承"></span>继承 | Inheritance | 子类在父类的基础上扩展，自动拥有父类的属性和方法 | `class Drink(Goods):` |
 
 ## 第 11 章 数据处理初体验：NumPy、pandas 与 Matplotlib
 
