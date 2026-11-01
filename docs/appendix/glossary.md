@@ -119,6 +119,19 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-函数"></span>函数 | Function | 把一段代码打包起来、起个名字，可以反复调用的程序单元 | `def discount(total):` |
+| <span id="g-参数"></span>参数 | Parameter | 定义函数时括号里的变量，用来接收调用时传进来的值 | `def greet(name)` 中的 `name` |
+| <span id="g-函数体"></span>函数体 | Function Body | def 下面缩进的、调用时才执行的代码 | discount 里计算优惠的几行 |
+| <span id="g-位置参数"></span>位置参数 | Positional Argument | 调用时按位置顺序一一对应传给参数的值 | `add(3, 5)`：3 给 a，5 给 b |
+| <span id="g-默认值"></span>默认值 | Default Value | 定义时给参数指定的值，调用时不传就用它 | `def f(qty, price=3.5)` |
+| <span id="g-关键字参数"></span>关键字参数 | Keyword Argument | 调用时用“参数名=值”指定的参数，可以不按顺序 | `price_of(2, rate=0.9)` |
+| <span id="g-返回值"></span>返回值 | Return Value | 函数用 return 交回给调用者的结果，没有 return 时是 None | `r = add(3, 5)` 中 r 为 8 |
+| <span id="g-局部变量"></span>局部变量 | Local Variable | 在函数里赋值的变量，只在函数内有效，函数结束就消失 | 函数里的 `pay` |
+| <span id="g-全局变量"></span>全局变量 | Global Variable | 在主程序里赋值的变量，函数里可以读取，修改需 global | 主程序里的 `rate = 0.9` |
+| <span id="g-文档字符串"></span>文档字符串 | Docstring | 函数体第一行的说明字符串，help() 可以显示它 | `"""返回实付金额。"""` |
+| <span id="g-匿名函数"></span>匿名函数 | Anonymous Function | 用 lambda 写成的一行、没有名字的函数 | `lambda x: x[1]` |
+| <span id="g-递归"></span>递归 | Recursion | 函数在函数体里调用自己，必须有结束条件 | `fact(n) = n * fact(n - 1)` |
+| <span id="g-工具调用"></span>工具调用 | Tool Calling | 让大模型根据问题选择并调用程序员写好的函数，也叫函数调用 | 大模型调用 `query_sales(date)` |
 
 ## 第 9 章 文件读写与异常处理
 
