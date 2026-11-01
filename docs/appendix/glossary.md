@@ -91,6 +91,15 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-列表"></span>列表 | List | 用方括号括起来、按顺序存放多个元素的数据类型，可以修改 | `["可乐", "面包", "牛奶"]` |
+| <span id="g-元素"></span>元素 | Element | 列表、元组等容器里存放的每一个数据 | `goods[0]` 取第一个元素 |
+| <span id="g-遍历"></span>遍历 | Traversal | 把容器里的元素一个一个取出来处理 | `for v in money:` |
+| <span id="g-列表推导式"></span>列表推导式 | List Comprehension | 用一行 `[表达式 for 变量 in 列表 if 条件]` 生成新列表的写法 | `[p * 0.9 for p in prices]` |
+| <span id="g-二维列表"></span>二维列表 | Two-dimensional List | 元素也是列表的列表，用来存放有行有列的表格 | `table[1][0]` 第 2 行第 1 列 |
+| <span id="g-一维数据"></span>一维数据 | One-dimensional Data | 排成一行或一列的一组数据 | 一周 7 天的营业额 |
+| <span id="g-二维数据"></span>二维数据 | Two-dimensional Data | 有行有列的表格数据 | Excel 表格、CSV 文件 |
+| <span id="g-元组"></span>元组 | Tuple | 用圆括号括起来、创建后不能修改的有序数据 | `("可乐", 3.5)` |
+| <span id="g-解包"></span>解包 | Unpacking | 把列表或元组里的多个元素一次赋给多个变量 | `name, price = ("可乐", 3.5)` |
 
 ## 第 7 章 字典与集合：按名字找数据
 

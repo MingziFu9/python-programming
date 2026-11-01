@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>列表操作台</title>
+<link rel="stylesheet" href="../common/sim.css">
+<style>
+.lst { display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 2px; min-height:70px; align-items:flex-start; }
+.it { text-align:center; min-width:58px; }
+.it .v { border:2px solid var(--line); border-radius:6px; padding:8px 6px; font-size:16px; background:#fafafa; transition:all .25s; }
+.it.new .v { background:#fff9c4; border-color:var(--warn); }
+.it .i { font-size:12px; color:var(--accent); } .it .n { font-size:11px; color:var(--warn); }
+.brk { font-size:26px; color:var(--muted); padding-top:4px; }
+.ops { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:6px; margin-top:8px; }
+.ops button { text-align:left; }
+.arg { display:flex; gap:6px; align-items:center; flex-wrap:wrap; font-size:13px; margin-top:6px; }
+.arg select, .arg input { font-size:13px; padding:2px 4px; }
+.arg input { width:4em; }
+.log { font-family:"JetBrains Mono",Consolas,monospace; font-size:12.5px; background:#263238; color:#e0f2f1; padding:6px 8px; border-radius:6px; min-height:7em; max-height:12em; overflow:auto; white-space:pre-wrap; font-variant-ligatures:none; }
+.log .err { color:#ff8a80; } .log .ret { color:#b9f6ca; } .log .cm { color:#90a4ae; }
+</style>
+</head>
+<body>
+<h1>列表操作台</h1>
+<div class="sub">选好参数，点下面的按钮操作列表，看列表怎么变：浅黄色是刚变化的元素，蓝色数字是正向索引，橙色是反向索引。下方黑框记录了每一步对应的 Python 代码和结果。</div>
+<div class="row ex"><span class="lbl">换一个列表：</span>
+  <button data-preset="cart">购物车（字符串）</button>
+  <button data-preset="money">一周营业额（数字）</button>
+  <button data-preset="empty">空列表 []</button>
+</div>
+<div class="box">
+  <div><code id="name">cart</code> = <span class="mono" id="repr"></span></div>
+  <div class="lst" id="lst"></div>
+  <div class="note">len(<span class="nm">cart</span>) = <b id="len"></b></div>
+</div>
+<div class="arg"><span>要加入或删除的元素 x：</span><select id="x"></select>
+  <span>位置 i：</span><input type="number" id="i" value="1"></div>
+<div class="ops">
+  <button data-op="append">append(x) 加到末尾</button>
+  <button data-op="insert">insert(i, x) 插到位置 i</button>
+  <button data-op="pop">pop() 删最后一个</button>
+  <button data-op="popi">pop(i) 删位置 i</button>
+  <button data-op="remove">remove(x) 删第一个 x</button>
+  <button data-op="del">del 列表[i]</button>
+  <button data-op="sort">sort() 从小到大</button>
+  <button data-op="sortr">sort(reverse=True)</button>
+  <button data-op="reverse">reverse() 倒过来</button>
+  <button data-op="index">index(x) 查位置</button>
+  <button data-op="count">count(x) 数个数</button>
+  <button data-op="in">x in 列表</button>
+</div>
+<div class="msg" id="msg"></div>
+<div class="log" id="log"></div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var PRESETS = {
+    cart: { name: "cart", items: ["可乐", "面包", "牛奶"], pool: ["可乐", "面包", "牛奶", "鸡蛋", "矿泉水", "薯片"] },
+    money: { name: "money", items: [1280, 1150.5, 1320, 1406, 1890], pool: [1280, 1150.5, 1320, 1406, 1890, 2350.8, 2108, 999] },
+    empty: { name: "cart", items: [], pool: ["可乐", "面包", "牛奶", "鸡蛋"] }
+  };
+  var lst, name, pool, changed = [];
+  function rep(v) { return typeof v === "string" ? "'" + v + "'" : String(v); }
+  function lit(v) { return typeof v === "string" ? '"' + v + '"' : String(v); }
+  function reprList(a) { return "[" + a.map(rep).join(", ") + "]"; }
+  function render() {
+    $("name").textContent = name;
+    document.querySelectorAll(".nm").forEach(function (e) { e.textContent = name; });
+    $("repr").textContent = reprList(lst);
+    $("len").textContent = lst.length;
+    var h = '<span class="brk">[</span>';
+    lst.forEach(function (v, k) {
+      h += '<div class="it' + (changed.indexOf(k) >= 0 ? " new" : "") + '"><div class="v">' + rep(v) + '</div><div class="i">' + k + '</div><div class="n">' + (k - lst.length) + '</div></div>';
+    });
+    h += '<span class="brk">]</span>';
+    $("lst").innerHTML = h;
+  }
+  function log(code, res, cls) {
+    var d = $("log");
+    d.innerHTML += ">>> " + code.replace(/</g, "&lt;") + (res !== undefined ? '\n<span class="' + (cls || "ret") + '">' + res + "</span>" : "") + "\n";
+    d.scrollTop = d.scrollHeight;
+  }
+  function load(p) {
+    var P = PRESETS[p]; name = P.name; pool = P.pool; lst = P.items.slice(); changed = [];
+    $("x").innerHTML = pool.map(function (v, k) { return '<option value="' + k + '">' + rep(v) + "</option>"; }).join("");
+    $("log").innerHTML = '<span class="cm"># ' + name + " = " + reprList(lst) + "</span>\n";
+    $("msg").textContent = ""; render();
+  }
+  function norm(i, n) { return i < 0 ? i + n : i; }
+  function op(o) {
+    var x = pool[+$("x").value], i = parseInt($("i").value || "0", 10), n = lst.length, msg = "", k;
+    changed = [];
+    try {
+      if (o === "append") { lst.push(x); changed = [lst.length - 1]; log(name + ".append(" + lit(x) + ")"); msg = "append 总是加到最后，列表长度加 1。"; }
+      else if (o === "insert") {
+        k = norm(i, n); k = Math.max(0, Math.min(k, n)); lst.splice(k, 0, x); changed = [k];
+        log(name + ".insert(" + i + ", " + lit(x) + ")");
+        msg = "插到索引 " + k + " 的位置，原来从这里开始的元素都往后挪一格。" + (i > n ? "（i 超出范围时不报错，直接加到最后。）" : "");
+      }
+      else if (o === "pop") {
+        if (!n) throw ["IndexError", "pop from empty list"];
+        var v = lst.pop(); log(name + ".pop()", rep(v)); msg = "pop() 删除最后一个，并把它“交出来”（返回值是 " + rep(v) + "）。";
+      }
+      else if (o === "popi") {
+        k = norm(i, n); if (!n) throw ["IndexError", "pop from empty list"];
+        if (k < 0 || k >= n) throw ["IndexError", "pop index out of range"];
+        var w = lst.splice(k, 1)[0]; log(name + ".pop(" + i + ")", rep(w)); msg = "删除索引 " + i + " 的元素并返回它，后面的元素往前挪一格。";
+      }
+      else if (o === "remove") {
+        k = lst.indexOf(x); if (k < 0) throw ["ValueError", "list.remove(x): x not in list"];
+        lst.splice(k, 1); log(name + ".remove(" + lit(x) + ")"); msg = "remove 按“值”删除，只删找到的第一个；没有返回值。";
+      }
+      else if (o === "del") {
+        k = norm(i, n); if (k < 0 || k >= n) throw ["IndexError", "list assignment index out of range"];
+        lst.splice(k, 1); log("del " + name + "[" + i + "]"); msg = "del 按“位置”删除，不返回被删的值。";
+      }
+      else if (o === "sort" || o === "sortr") {
+        lst.sort(function (a, b) { return a < b ? -1 : a > b ? 1 : 0; });
+        if (o === "sortr") lst.reverse();
+        changed = lst.map(function (_, j) { return j; });
+        log(name + ".sort(" + (o === "sortr" ? "reverse=True" : "") + ")");
+        msg = "sort() 直接改动原列表。" + (typeof lst[0] === "string" ? "注意：中文按 Unicode 编号排序，不是按拼音。" : "");
+      }
+      else if (o === "reverse") { lst.reverse(); changed = lst.map(function (_, j) { return j; }); log(name + ".reverse()"); msg = "reverse() 只是倒过来，不排序。"; }
+      else if (o === "index") {
+        k = lst.indexOf(x); if (k < 0) throw ["ValueError", "list.index(x): x not in list"];
+        changed = [k]; log(name + ".index(" + lit(x) + ")", String(k)); msg = "index 返回第一个 x 的索引，列表本身不变。";
+      }
+      else if (o === "count") { var c = lst.filter(function (v) { return v === x; }).length; log(name + ".count(" + lit(x) + ")", String(c)); msg = "count 数出 x 出现了几次，列表本身不变。"; }
+      else if (o === "in") { var t = lst.indexOf(x) >= 0; log(lit(x) + " in " + name, t ? "True" : "False"); msg = "in 判断是否包含，结果是 True 或 False。"; }
+      $("msg").className = "msg"; $("msg").textContent = msg;
+    } catch (e) {
+      log(o === "del" ? "del " + name + "[" + i + "]" : name + "." + (o === "popi" ? "pop(" + i + ")" : o === "pop" ? "pop()" : o + "(" + lit(x) + ")"),
+          e[0] + ": " + e[1], "err");
+      $("msg").className = "msg bad"; $("msg").textContent = "报错了：" + e[0] + "。列表没有变化。";
+    }
+    render();
+  }
+  document.querySelectorAll("[data-op]").forEach(function (b) { b.onclick = function () { op(b.dataset.op); }; });
+  document.querySelectorAll("[data-preset]").forEach(function (b) { b.onclick = function () { load(b.dataset.preset); }; });
+  load("cart");
+})();
+</script>
+<script src="../common/sim.js"></script>
+</body>
+</html>
