@@ -105,6 +105,15 @@ description: 本书主要术语的中英文名称、简明定义和例子，按�
 
 | 术语 | 英文 | 定义 | 例子 |
 |---|---|---|---|
+| <span id="g-字典"></span>字典 | Dictionary | 用花括号存放“键: 值”对、按键查找值的数据类型 | `{"可乐": 3.5, "面包": 5.5}` |
+| <span id="g-键"></span>键 | Key | 字典中用来查找的名字，不能重复，必须是不可修改的类型 | `prices["可乐"]` 中的 `"可乐"` |
+| <span id="g-值"></span>值 | Value | 字典中键所对应的数据，可以是任何类型，可以重复 | `prices["可乐"]` 得到 `3.5` |
+| <span id="g-键值对"></span>键值对 | Key-value Pair | 字典中“键: 值”组成的一对数据 | `"可乐": 3.5` |
+| <span id="g-词频统计"></span>词频统计 | Word Frequency Count | 统计一段文字中每个词出现的次数 | `counts[w] = counts.get(w, 0) + 1` |
+| <span id="g-停用词"></span>停用词 | Stop Word | 到处出现却没有实际意义、统计前要去掉的词和标点 | “很”“的”“，” |
+| <span id="g-JSON"></span>JSON | JavaScript Object Notation | 互联网上最常用的数据格式，结构和 Python 的字典、列表嵌套相同 | `{"姓名": "周洋", "积分": 693}` |
+| <span id="g-集合"></span>集合 | Set | 元素不重复、没有顺序的数据类型，用于去重和比较两组数据 | `{"可乐", "面包"}` |
+| <span id="g-去重"></span>去重 | Deduplication | 去掉重复的数据，只留一份 | `set(["可乐", "可乐"])` |
 
 ## 第 8 章 函数：把代码打包复用
 

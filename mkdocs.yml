@@ -58,6 +58,7 @@ nav:
     - "分支流程走一遍": sims/branch-flow/index.md
     - "循环追踪：变量一步步变化": sims/loop-trace/index.md
     - "列表操作台": sims/list-console/index.md
+    - "词频统计：一词一词计出来": sims/word-count/index.md
   - 学习图谱: learning-graph/index.md
   - 常见问题: faq/index.md
   - "期末模拟卷": mock-exam.md

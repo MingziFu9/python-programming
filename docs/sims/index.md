@@ -16,4 +16,5 @@ description: 本书配套的交互动画，可以在浏览器里直接操作，�
 | 第 4 章 | [分支流程走一遍](branch-flow/index.md) | 单步执行 if-else 和 if-elif-else 程序，输入不同的值，看程序走了哪条路、跳过了哪些分支 |
 | 第 5 章 | [循环追踪：变量一步步变化](loop-trace/index.md) | 单步执行 for 循环、while 循环和 break、continue，观察每一圈变量的变化，理解累加器、计数器和找最大值 |
 | 第 6 章 | [列表操作台](list-console/index.md) | 点按钮对列表做 append、insert、pop、remove、del、sort、reverse 等操作，看列表和索引怎样变化，并看到对应的 Python 代码和报错 |
+| 第 7 章 | [词频统计：一词一词计出来](word-count/index.md) | 单步执行词频统计程序，观察字典如何随着每个词增加或累加，对比 d[键] 和 d.get(键, 默认值) 的区别 |
 <!-- sims:end -->
